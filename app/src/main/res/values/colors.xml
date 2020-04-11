@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00008577</color>
+    <color name="helloMainColor">#FF956F</color>
+    <color name="cursosColor">#FF624D</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="yuliasColor">#FFA0A0</color>
+    <color name="whiteStartBtn">#ECECEC</color>
+    <color name="whiteStartBtnPressed">#ACA9A9</color>
+    <color name="backBtn">#F80F0F</color>
+    <color name="backBtnPressed">#AA0E0E</color>
+    <color name="nextButton">#F80F0F</color>
+    <color name="nextBtnPressed">#AA0E0E</color>
+    <color name="text_hello2">#F5F5F5</color>
+    <color name="text_hello">#FFFFFF</color>
+    <color name="text_name">#979797</color>
+    <color name="name_edittext">
+        #FFFFFF
+    </color>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hello_size">
+        60sp
+    </dimen>
+
+    <dimen name="min_width_editText">
+        150dp
+    </dimen>
+
+    <dimen name="fab_margin">
+        16dp
+    </dimen>
+
+    <dimen name="def_image_size">
+        24dp
+    </dimen>
+
+    <dimen name="selected_image_size">
+        28dp
+    </dimen>
+
+    <dimen name="def_text_sex">
+        14sp
+    </dimen>
+
+</resources>

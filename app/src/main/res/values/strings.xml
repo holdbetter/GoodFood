@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">GoodFood</string>
+    <string name="hello">Привет!</string>
+    <string name="hint_ves">Введите вес</string>
+    <string name="privet">Привет!</string>
+    <string name="welcome">Добро пожаловать в GoodFood, расскажи о себе </string>
+    <string name="go">Начать</string>
+    <string name="go_next">Дальше</string>
+    <string name="now_weight">Текущий вес</string>
+    <string name="desired_weight">Желаемый вес</string>
+    <string name="height">Рост</string>
+
+
+    <string name="app__name">Test</string>
+    <string name="click_me">Click me</string>
+    <string name="text">Hello!</string>
+    <string name="sex_choose">Твой пол</string>
+    <string name="default_weight">60</string>
+    <string name="default_height">60</string>
+    <string name="set_name">Твоё имя</string>
+    <string name="set_lifestyle">Образ жизни</string>
+    <string name="set_name_hint">Пиши здесь…</string>
+    <string name="male">Мужчина</string>
+    <string name="female">Женщина</string>
+    <string name="lifestyle_underneath">Я - амембка и не делаю лишних движений</string>
+    <string name="lifestyle_low">Мало двигаюсь</string>
+    <string name="lifestyle_medium">Люблю гулять или просто часто передвигаюсь</string>
+    <string name="lifestyle_high">Я тренируюсь в спортзале</string>
+</resources>
