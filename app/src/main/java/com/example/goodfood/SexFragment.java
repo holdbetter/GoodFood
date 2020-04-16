@@ -55,15 +55,18 @@ public class SexFragment extends Fragment
         ButtonWithCustomBackground nextBtn = sexView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
+
         return sexView;
     }
 
-    private void sexSelected(TextView selectedText, TextView oldText, AppCompatImageView selectedImage, AppCompatImageView oldImage, boolean selectedForFirstTime)
+    private void sexSelected(AppCompatTextView selectedText, AppCompatTextView oldText, AppCompatImageView selectedImage, AppCompatImageView oldImage, boolean selectedForFirstTime)
     {
         int heightIncrease = selectedImage.getHeight() + 40;
         int widthIncrease = selectedImage.getWidth() + 40;
         LinearLayout.LayoutParams paramsNew = new LinearLayout.LayoutParams(widthIncrease, heightIncrease);
         paramsNew.gravity = Gravity.CENTER_HORIZONTAL;
+        selectedImage.setLayoutParams(paramsNew);
+
         selectedImage.setAlpha(1f);
         selectedText.setAlpha(1f);
 
@@ -76,7 +79,6 @@ public class SexFragment extends Fragment
             oldImage.setLayoutParams(paramsOld);
         }
 
-        selectedImage.setLayoutParams(paramsNew);
 
         oldText.setTextSize(12);
         selectedText.setTextSize(16);
@@ -87,12 +89,12 @@ public class SexFragment extends Fragment
 
     private class WomanPressed implements View.OnClickListener
     {
-        private final TextView womanText;
-        private final TextView manText;
+        private final AppCompatTextView womanText;
+        private final AppCompatTextView manText;
         private final AppCompatImageView womanImage;
         private final AppCompatImageView manImage;
 
-        public WomanPressed(TextView womanText, TextView manText, AppCompatImageView womanImage, AppCompatImageView manImage)
+        WomanPressed(AppCompatTextView womanText, AppCompatTextView manText, AppCompatImageView womanImage, AppCompatImageView manImage)
         {
             this.womanText = womanText;
             this.manText = manText;
@@ -123,12 +125,12 @@ public class SexFragment extends Fragment
 
     private class ManPressed implements View.OnClickListener
     {
-        private final TextView manText;
-        private final TextView womanText;
+        private final AppCompatTextView manText;
+        private final AppCompatTextView womanText;
         private final AppCompatImageView manImage;
         private final AppCompatImageView womanImage;
 
-        public ManPressed(TextView manText, TextView womanText, AppCompatImageView manImage, AppCompatImageView womanImage)
+        ManPressed(AppCompatTextView manText, AppCompatTextView womanText, AppCompatImageView manImage, AppCompatImageView womanImage)
         {
             this.manText = manText;
             this.womanText = womanText;
@@ -161,11 +163,13 @@ public class SexFragment extends Fragment
     {
         private final ViewPager2 vp2;
 
-        public GoNextButton(ViewPager2 vp2)
+        GoNextButton(ViewPager2 vp2)
         {
             this.vp2 = vp2;
         }
 
+        //ctrl + i
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event)
         {

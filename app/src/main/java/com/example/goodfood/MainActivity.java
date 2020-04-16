@@ -26,6 +26,7 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
         fragmentArrayList.add(new HelloFragment());
         fragmentArrayList.add(new NameFragment());
         fragmentArrayList.add(new SexFragment());
+        fragmentArrayList.add(new DateFragment());
         fragmentArrayList.add(new HeightFragment());
         fragmentArrayList.add(new WeightFragment());
         fragmentArrayList.add(new DesiredWeightFragment());

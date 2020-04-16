@@ -15,6 +15,7 @@
     <string name="click_me">Click me</string>
     <string name="text">Hello!</string>
     <string name="sex_choose">Твой пол</string>
+    <string name="date_choose">Дата рождения</string>
     <string name="default_weight">60</string>
     <string name="default_height">60</string>
     <string name="set_name">Твоё имя</string>
@@ -26,4 +27,6 @@
     <string name="lifestyle_low">Мало двигаюсь</string>
     <string name="lifestyle_medium">Люблю гулять или просто часто передвигаюсь</string>
     <string name="lifestyle_high">Я тренируюсь в спортзале</string>
+
+    <string name="fontName">monstserrat_regular.ttf</string>
 </resources>

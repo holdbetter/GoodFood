@@ -24,4 +24,7 @@
         14sp
     </dimen>
 
+    <dimen name="dateItemSpace">
+        100px
+    </dimen>
 </resources>

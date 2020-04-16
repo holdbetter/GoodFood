@@ -17,4 +17,6 @@
     <color name="name_edittext">
         #FFFFFF
     </color>
+
+    <color name="dateItem">#FFFFFF</color>
 </resources>
