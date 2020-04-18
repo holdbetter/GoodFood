@@ -130,4 +130,10 @@ public class ButtonWithCustomBackground extends AppCompatButton
     private static void clear(Canvas canvas) {
         canvas.drawColor(Color.BLACK, PorterDuff.Mode.CLEAR);
     }
+
+    @Override
+    public boolean performClick()
+    {
+        return super.performClick();
+    }
 }

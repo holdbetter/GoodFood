@@ -33,7 +33,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="@drawable/left_button_shape"
+            android:background="@drawable/circle_button_shape"
             app:srcCompat="@drawable/ic_minus" />
     </FrameLayout>
 
@@ -52,7 +52,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="@drawable/left_button_shape"
+            android:background="@drawable/circle_button_shape"
             app:srcCompat="@drawable/ic_new_plus" />
     </FrameLayout>
 

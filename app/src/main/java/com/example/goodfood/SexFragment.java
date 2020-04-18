@@ -59,7 +59,7 @@ public class SexFragment extends Fragment
         return sexView;
     }
 
-    private void sexSelected(AppCompatTextView selectedText, AppCompatTextView oldText, AppCompatImageView selectedImage, AppCompatImageView oldImage, boolean selectedForFirstTime)
+    private void sexSelected(AppCompatTextView selectedText, AppCompatTextView oldText, AppCompatImageView selectedImage, AppCompatImageView oldImage, boolean decreaseElement)
     {
         int heightIncrease = selectedImage.getHeight() + 40;
         int widthIncrease = selectedImage.getWidth() + 40;
@@ -70,17 +70,16 @@ public class SexFragment extends Fragment
         selectedImage.setAlpha(1f);
         selectedText.setAlpha(1f);
 
-        if(!selectedForFirstTime)
+        if(decreaseElement)
         {
             int heightDecrease = oldImage.getHeight() - 40;
             int widthDecrease = oldImage.getWidth() - 40;
             LinearLayout.LayoutParams paramsOld = new LinearLayout.LayoutParams(widthDecrease, heightDecrease);
             paramsOld.gravity = Gravity.CENTER_HORIZONTAL;
             oldImage.setLayoutParams(paramsOld);
+            oldText.setTextSize(12);
         }
 
-
-        oldText.setTextSize(12);
         selectedText.setTextSize(16);
 
         oldImage.setAlpha(0.3f);
@@ -107,7 +106,7 @@ public class SexFragment extends Fragment
         {
             if (!isManSelected && !isWomanSelected)
             {
-                sexSelected(womanText, manText, womanImage, manImage, true);
+                sexSelected(womanText, manText, womanImage, manImage, false);
                 isWomanSelected = true;
                 isManSelected = false;
                 return;
@@ -115,11 +114,10 @@ public class SexFragment extends Fragment
 
             if (!isWomanSelected)
             {
-                sexSelected(womanText, manText, womanImage, manImage, false);
+                sexSelected(womanText, manText, womanImage, manImage, true);
+                isWomanSelected = true;
+                isManSelected = false;
             }
-
-            isWomanSelected = true;
-            isManSelected = false;
         }
     }
 
@@ -143,7 +141,7 @@ public class SexFragment extends Fragment
         {
             if (!isManSelected && !isWomanSelected)
             {
-                sexSelected(manText, womanText, manImage, womanImage, true);
+                sexSelected(manText, womanText, manImage, womanImage, false);
                 isWomanSelected = false;
                 isManSelected = true;
                 return;
@@ -151,11 +149,10 @@ public class SexFragment extends Fragment
 
             if (!isManSelected)
             {
-                sexSelected(manText, womanText, manImage, womanImage, false);
+                sexSelected(manText, womanText, manImage, womanImage, true);
+                isManSelected = true;
+                isWomanSelected = false;
             }
-
-            isManSelected = true;
-            isWomanSelected = false;
         }
     }
 

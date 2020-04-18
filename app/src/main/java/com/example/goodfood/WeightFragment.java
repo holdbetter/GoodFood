@@ -75,12 +75,13 @@ public class WeightFragment extends Fragment
             {
                 if (!(v instanceof EditText) && weightEditText.hasFocus())
                 {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     View focucedView = getActivity().getCurrentFocus();
                     if (focucedView == null)
                     {
                         focucedView = new View(getActivity());
                     }
+
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
                     weightEditText.clearFocus();
                     return true;
@@ -120,7 +121,7 @@ public class WeightFragment extends Fragment
             return 30;
         } else
         {
-            int result = 0;
+            int result = 30;
 
             try
             {
