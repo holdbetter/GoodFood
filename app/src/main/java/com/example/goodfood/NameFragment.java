@@ -10,29 +10,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class NameFragment extends Fragment
 {
+    private ViewPager2 vp2;
+
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View nameView = inflater.inflate(R.layout.name_fragment, container, false);
-        final ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
-
+        vp2 = getActivity().findViewById(R.id.viewPager);
 
         ButtonWithCustomBackground nextBtn = nameView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
 
-        final AppCompatEditText nameSet = nameView.findViewById(R.id.setup_name);
+        final AppCompatEditText nameSet = nameView.findViewById(R.id.set_value);
+
         nameSet.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
@@ -77,7 +83,7 @@ public class NameFragment extends Fragment
     {
         private final ViewPager2 vp2;
 
-        public GoNextButton(ViewPager2 vp2)
+        GoNextButton(ViewPager2 vp2)
         {
             this.vp2 = vp2;
         }

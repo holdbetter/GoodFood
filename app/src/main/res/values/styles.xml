@@ -9,12 +9,7 @@
         <item name="android:textColor">@color/text_hello</item>
     </style>
 
-<!--    <style name="TextMain" parent="Widget.MaterialComponents.TextView">-->
-<!--        <item name="android:fontFamily">@font/montserrat_bold_italic</item>-->
-<!--    </style>-->
-
     <style name="HelloFragmentDefault">
-        <item name="android:background">@drawable/hello_background_gradient</item>
         <item name="android:paddingLeft">30dp</item>
         <item name="android:paddingRight">30dp</item>
         <item name="android:paddingBottom">40dp</item>
@@ -22,15 +17,16 @@
 
     <style name="TextOnTop" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginTop">80dp</item>
     </style>
 
     <style name="TextContent" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
@@ -57,22 +53,23 @@
     <style name="ValueEditText" parent="@style/AppTheme">
         <item name="android:background">@null</item>
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">55sp</item>
         <item name="android:inputType">number</item>
-        <item name="android:layout_marginTop">60dp</item>
+        <item name="android:textStyle">bold</item>
+<!--        <item name="android:layout_marginTop">60dp</item>-->
         <item name="android:textColor">@color/text_dafault_color</item>
         <item name="android:textCursorDrawable">@drawable/weight_cursor</item>
         <item name="android:textSelectHandle">@drawable/text_select_handle</item>
     </style>
 
     <style name="LifestyleButtonChooser" parent="Widget.AppCompat.Button">
-        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">63dp</item>
         <item name="android:paddingStart">30dp</item>
         <item name="android:elevation" tools:targetApi="lollipop">10dp</item>
         <item name="android:paddingEnd">30dp</item>
         <item name="android:background">@drawable/lifestyle_selector</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/montserrat_light</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/lifestyle_text_selector</item>

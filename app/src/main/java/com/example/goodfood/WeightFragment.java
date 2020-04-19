@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,8 +40,9 @@ public class WeightFragment extends Fragment
         FrameLayout plus_btn = weightView.findViewById(R.id.plus_layout);
         FrameLayout minus_btn = weightView.findViewById(R.id.minus_layout);
 
-        weightEditText = weightView.findViewById(R.id.set_weight);
+        weightEditText = weightView.findViewById(R.id.set_value);
         weightEditText.addTextChangedListener(new TextValueChangedListener());
+//        weightEditText.setOnClickListener();
 
         weightInteger = getWeightValue();
 
@@ -68,25 +67,28 @@ public class WeightFragment extends Fragment
             }
         });
 
+        weightEditText.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                weightEditText.requestFocus();
+            }
+        });
+
         weightView.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)
             {
-                if (!(v instanceof EditText) && weightEditText.hasFocus())
-                {
-                    View focucedView = getActivity().getCurrentFocus();
-                    if (focucedView == null)
-                    {
-                        focucedView = new View(getActivity());
-                    }
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
-                    weightEditText.clearFocus();
+                if (!(v instanceof EditText) && imm.isActive())
+                {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    v.performClick();
                     return true;
                 }
-
                 return false;
             }
         });
@@ -144,7 +146,7 @@ public class WeightFragment extends Fragment
     {
         private final ViewPager2 vp2;
 
-        public GoNextButton(ViewPager2 vp2)
+        GoNextButton(ViewPager2 vp2)
         {
             this.vp2 = vp2;
         }

@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,7 +40,7 @@ public class DesiredWeightFragment extends Fragment
         FrameLayout plus_btn = weightView.findViewById(R.id.plus_layout);
         FrameLayout minus_btn = weightView.findViewById(R.id.minus_layout);
 
-        weightEditText = weightView.findViewById(R.id.set_weight);
+        weightEditText = weightView.findViewById(R.id.set_value);
         weightEditText.addTextChangedListener(new TextValueChangedListener());
 
         weightInteger = getWeightValue();

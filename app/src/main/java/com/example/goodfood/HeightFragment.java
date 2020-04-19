@@ -40,7 +40,7 @@ public class HeightFragment extends Fragment
         FrameLayout plus_btn = heightView.findViewById(R.id.plus_layout);
         FrameLayout minus_btn = heightView.findViewById(R.id.minus_layout);
 
-        heightEditText = heightView.findViewById(R.id.set_height);
+        heightEditText = heightView.findViewById(R.id.set_value);
         heightEditText.addTextChangedListener(new TextValueChangedListener());
 
         heightInteger = getWeightValue();
@@ -141,7 +141,7 @@ public class HeightFragment extends Fragment
     {
         private final ViewPager2 vp2;
 
-        public GoNextButton(ViewPager2 vp2)
+        GoNextButton(ViewPager2 vp2)
         {
             this.vp2 = vp2;
         }

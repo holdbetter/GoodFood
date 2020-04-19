@@ -2,70 +2,76 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     style="@style/HelloFragmentDefault"
+    tools:background="@drawable/hello_background_gradient"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/lifestyleTextView"
         style="@style/TextOnTop"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="bottom"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mainContent"
+        app:layout_constraintVertical_weight="0.2"
         android:text="@string/set_lifestyle"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintBottom_toTopOf="@id/buttonGo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lifestyleTextView"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintVertical_weight="1">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleUnderneath"
             style="@style/LifestyleButtonChooser"
+            android:layout_marginTop="10dp"
             android:text="@string/lifestyle_underneath"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lifestyleTextView"
-            tools:targetApi="lollipop" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/lifestyleLow"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleLow"
             style="@style/LifestyleButtonChooser"
-            android:layout_marginTop="20dp"
             android:text="@string/lifestyle_low"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lifestyleUnderneath"
-            tools:targetApi="lollipop" />
+            app:layout_constraintBottom_toTopOf="@id/lifestyleMedium"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleMedium"
             style="@style/LifestyleButtonChooser"
-            android:layout_marginTop="20dp"
             android:text="@string/lifestyle_medium"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lifestyleLow"
-            tools:targetApi="lollipop" />
+            app:layout_constraintBottom_toTopOf="@id/lifestyleHigh"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleHigh"
             style="@style/LifestyleButtonChooser"
-            android:layout_marginTop="20dp"
             android:text="@string/lifestyle_high"
+            android:layout_marginBottom="30dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lifestyleMedium"
-            tools:targetApi="lollipop" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.example.goodfood.ButtonWithCustomBackground
         android:id="@+id/buttonGo"

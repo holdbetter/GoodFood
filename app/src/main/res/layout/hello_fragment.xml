@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     style="@style/HelloFragmentDefault"
+    tools:background="@drawable/hello_background_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,16 +13,20 @@
         style="@style/TextOnTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/privet"
+        android:layout_marginTop="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/privet"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonGo"
+        app:layout_constraintVertical_bias="0.4" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/TextContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hello" />

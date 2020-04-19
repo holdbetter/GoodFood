@@ -55,6 +55,8 @@ public class SexFragment extends Fragment
         ButtonWithCustomBackground nextBtn = sexView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
+        isManSelected = false;
+        isWomanSelected = false;
 
         return sexView;
     }
