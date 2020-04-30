@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="default_height">175</integer>
-    <integer name="min_height">130</integer>
-    <integer name="max_height">240</integer>
-    <integer name="default_weight">55</integer>
-    <integer name="min_weight">30</integer>
-    <integer name="max_weight">140</integer>
+    <integer name="default_height">
+        175
+    </integer>
+    <integer name="min_height">
+        130
+    </integer>
+    <integer name="max_height">
+        240
+    </integer>
+    <integer name="default_weight">
+        55
+    </integer>
+    <integer name="min_weight">
+        30
+    </integer>
+    <integer name="max_weight">
+        140
+    </integer>
 </resources>

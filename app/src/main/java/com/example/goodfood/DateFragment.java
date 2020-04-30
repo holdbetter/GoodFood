@@ -1,16 +1,12 @@
 package com.example.goodfood;
 
-import android.annotation.SuppressLint;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +17,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.aigestudio.wheelpicker.IWheelPicker;
 import com.aigestudio.wheelpicker.WheelPicker;
-import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.aigestudio.wheelpicker.widgets.WheelDayPicker;
 import com.aigestudio.wheelpicker.widgets.WheelMonthPicker;
 import com.aigestudio.wheelpicker.widgets.WheelYearPicker;
-import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class DateFragment extends Fragment
 {
@@ -65,8 +57,8 @@ public class DateFragment extends Fragment
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position)
             {
-                wheelDayPicker.setYear((int)data);
-                currentYear = (int)data;
+                wheelDayPicker.setYear((int) data);
+                currentYear = (int) data;
             }
         });
 
@@ -75,7 +67,7 @@ public class DateFragment extends Fragment
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position)
             {
-                wheelDayPicker.setYearAndMonth(currentYear, (int)data);
+                wheelDayPicker.setYearAndMonth(currentYear, (int) data);
             }
         });
 
@@ -90,7 +82,7 @@ public class DateFragment extends Fragment
         return dateView;
     }
 
-    private void wheelSetup(IWheelPicker ...wheelPickers)
+    private void wheelSetup(IWheelPicker... wheelPickers)
     {
         for (IWheelPicker wheelPicker : wheelPickers)
         {

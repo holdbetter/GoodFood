@@ -204,12 +204,10 @@ public class HeightFragment extends Fragment
         if (heightEditText.getText() == null)
         {
             return minHeight;
-        }
-        else if (heightEditText.getText().length() == 0)
+        } else if (heightEditText.getText().length() == 0)
         {
             return minHeight;
-        }
-        else
+        } else
         {
             int result = minHeight;
 

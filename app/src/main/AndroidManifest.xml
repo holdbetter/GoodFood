@@ -3,7 +3,7 @@
     package="com.example.goodfood"
     android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"

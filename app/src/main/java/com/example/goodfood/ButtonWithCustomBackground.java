@@ -11,11 +11,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.widget.Button;
 
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatTextView;
 
 public class ButtonWithCustomBackground extends AppCompatButton
 {
@@ -26,17 +23,20 @@ public class ButtonWithCustomBackground extends AppCompatButton
     private Bitmap mBackgroundBitmap;
     private Canvas mBackgroundCanvas;
 
-    public ButtonWithCustomBackground(final Context context) {
+    public ButtonWithCustomBackground(final Context context)
+    {
         super(context);
         init();
     }
 
-    public ButtonWithCustomBackground(final Context context, final AttributeSet attrs) {
+    public ButtonWithCustomBackground(final Context context, final AttributeSet attrs)
+    {
         super(context, attrs);
         init();
     }
 
-    private void init() {
+    private void init()
+    {
         mPaint = new Paint();
         mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
         super.setTextColor(Color.BLACK);
@@ -45,8 +45,10 @@ public class ButtonWithCustomBackground extends AppCompatButton
 
     @Override
     @Deprecated
-    public void setBackgroundDrawable(final Drawable bg) {
-        if (mBackground == bg) {
+    public void setBackgroundDrawable(final Drawable bg)
+    {
+        if (mBackground == bg)
+        {
             return;
         }
 
@@ -58,7 +60,8 @@ public class ButtonWithCustomBackground extends AppCompatButton
         // is larger than the text.
         int w = getWidth();
         int h = getHeight();
-        if (mBackground != null && w != 0 && h != 0) {
+        if (mBackground != null && w != 0 && h != 0)
+        {
             mBackground.setBounds(0, 0, w, h);
         }
         requestLayout();
@@ -66,32 +69,38 @@ public class ButtonWithCustomBackground extends AppCompatButton
     }
 
     @Override
-    public void setBackgroundColor(final int color) {
+    public void setBackgroundColor(final int color)
+    {
         setBackgroundDrawable(new ColorDrawable(color));
     }
 
     @Override
-    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
+    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh)
+    {
         super.onSizeChanged(w, h, oldw, oldh);
-        if (w == 0 || h == 0) {
+        if (w == 0 || h == 0)
+        {
             freeBitmaps();
             return;
         }
 
         createBitmaps(w, h);
-        if (mBackground != null) {
+        if (mBackground != null)
+        {
             mBackground.setBounds(0, 0, w, h);
         }
     }
 
-    private void createBitmaps(int w, int h) {
+    private void createBitmaps(int w, int h)
+    {
         mBackgroundBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mBackgroundCanvas = new Canvas(mBackgroundBitmap);
         mMaskBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ALPHA_8);
         mMaskCanvas = new Canvas(mMaskBitmap);
     }
 
-    private void freeBitmaps() {
+    private void freeBitmaps()
+    {
         mBackgroundBitmap = null;
         mBackgroundCanvas = null;
         mMaskBitmap = null;
@@ -99,8 +108,10 @@ public class ButtonWithCustomBackground extends AppCompatButton
     }
 
     @Override
-    protected void onDraw(final Canvas canvas) {
-        if (isNothingToDraw()) {
+    protected void onDraw(final Canvas canvas)
+    {
+        if (isNothingToDraw())
+        {
             return;
         }
         drawMask();
@@ -108,7 +119,8 @@ public class ButtonWithCustomBackground extends AppCompatButton
         canvas.drawBitmap(mBackgroundBitmap, 0.f, 0.f, null);
     }
 
-    private boolean isNothingToDraw() {
+    private boolean isNothingToDraw()
+    {
         return mBackground == null
                 || getWidth() == 0
                 || getHeight() == 0;
@@ -116,18 +128,21 @@ public class ButtonWithCustomBackground extends AppCompatButton
 
     // draw() calls onDraw() leading to stack overflow
     @SuppressLint("WrongCall")
-    private void drawMask() {
+    private void drawMask()
+    {
         clear(mMaskCanvas);
         super.onDraw(mMaskCanvas);
     }
 
-    private void drawBackground() {
+    private void drawBackground()
+    {
         clear(mBackgroundCanvas);
         mBackground.draw(mBackgroundCanvas);
         mBackgroundCanvas.drawBitmap(mMaskBitmap, 0.f, 0.f, mPaint);
     }
 
-    private static void clear(Canvas canvas) {
+    private static void clear(Canvas canvas)
+    {
         canvas.drawColor(Color.BLACK, PorterDuff.Mode.CLEAR);
     }
 

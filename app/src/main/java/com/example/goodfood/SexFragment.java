@@ -3,16 +3,12 @@ package com.example.goodfood;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,7 +68,7 @@ public class SexFragment extends Fragment
         selectedImage.setAlpha(1f);
         selectedText.setAlpha(1f);
 
-        if(decreaseElement)
+        if (decreaseElement)
         {
             int heightDecrease = oldImage.getHeight() - 40;
             int widthDecrease = oldImage.getWidth() - 40;

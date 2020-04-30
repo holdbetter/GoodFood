@@ -208,7 +208,6 @@ public class WeightFragment extends Fragment
         }
     }
 
-
     private class GoNextButton implements View.OnTouchListener
     {
         private final ViewPager2 vp2;
@@ -245,7 +244,6 @@ public class WeightFragment extends Fragment
         }
     }
 
-
     private class TextValueChangedListener implements TextWatcher
     {
         @Override
@@ -263,7 +261,7 @@ public class WeightFragment extends Fragment
         @Override
         public void afterTextChanged(Editable s)
         {
-            if(s.length() > 3)
+            if (s.length() > 3)
             {
                 s.delete(s.length() - 1, s.length());
             }

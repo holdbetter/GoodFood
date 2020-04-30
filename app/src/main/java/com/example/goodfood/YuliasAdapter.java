@@ -7,10 +7,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.ArrayList;
 
-public class YuliasAdapter extends FragmentStateAdapter {
-    ArrayList<Fragment> list;
+public class YuliasAdapter extends FragmentStateAdapter
+{
+    private ArrayList<Fragment> list;
 
-    public YuliasAdapter(@NonNull FragmentActivity fragmentActivity, ArrayList<Fragment> uni)
+    YuliasAdapter(@NonNull FragmentActivity fragmentActivity, ArrayList<Fragment> uni)
     {
         super(fragmentActivity);
         list = uni;

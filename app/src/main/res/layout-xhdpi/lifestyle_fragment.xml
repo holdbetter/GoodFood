@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mainContent"
         app:layout_constraintVertical_weight="0.2"
-        android:text="@string/set_lifestyle"/>
+        android:text="@string/set_lifestyle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainContent"
@@ -41,7 +41,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lifestyleLow"/>
+            app:layout_constraintBottom_toTopOf="@id/lifestyleLow" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleLow"
@@ -50,7 +50,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lifestyleUnderneath"
-            app:layout_constraintBottom_toTopOf="@id/lifestyleMedium"/>
+            app:layout_constraintBottom_toTopOf="@id/lifestyleMedium" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleMedium"
@@ -59,7 +59,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lifestyleLow"
-            app:layout_constraintBottom_toTopOf="@id/lifestyleHigh"/>
+            app:layout_constraintBottom_toTopOf="@id/lifestyleHigh" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lifestyleHigh"
@@ -69,7 +69,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lifestyleMedium"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

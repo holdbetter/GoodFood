@@ -5,8 +5,7 @@
     style="@style/HelloFragmentDefault"
     tools:background="@drawable/hello_background_gradient"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/your_date"
@@ -20,7 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="0.2"/>
+        app:layout_constraintVertical_weight="0.2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainContent"
@@ -43,26 +42,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.4"
-            >
+            app:layout_constraintVertical_bias="0.4">
 
             <com.aigestudio.wheelpicker.widgets.WheelDayPicker
                 android:id="@+id/dayPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                />
+                android:layout_marginEnd="12dp" />
 
             <com.aigestudio.wheelpicker.widgets.WheelMonthPicker
                 android:id="@+id/monthPicker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <com.aigestudio.wheelpicker.widgets.WheelYearPicker
                 android:id="@+id/yearPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
 
@@ -76,6 +73,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/go_next"/>
+        android:text="@string/go_next" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
