@@ -35,11 +35,12 @@
             android:id="@+id/minus_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
             android:padding="15dp"
+            android:layout_marginStart="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/set_value"
-            app:layout_constraintEnd_toStartOf="@+id/set_value"
-            app:layout_constraintTop_toTopOf="@+id/set_value">
+            app:layout_constraintTop_toTopOf="@+id/set_value"
+            app:layout_constraintLeft_toLeftOf="parent"
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/minus"
@@ -55,10 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/set_value"
-            app:layout_constraintStart_toEndOf="@+id/set_value"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/set_value"
-            android:layout_marginStart="40dp">
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/plus"
@@ -71,10 +73,12 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/set_value"
+            android:tag="@string/heightEditTag"
             style="@style/ValueEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_height"
+            android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"

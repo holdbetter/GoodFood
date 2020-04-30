@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00008577</color>
-    <color name="helloMainColor">#FF956F</color>
-    <color name="cursorColor">#FF624D</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="yuliasColor">#FFA0A0</color>
+    <color name="colorPrimary">#FF956F</color>
+    <color name="colorPrimaryDark">#ED8060</color>
+    <color name="colorAccent">#FF624D</color>
+    <color name="background_grad_start">#FF956F</color>
+        <color name="background_grad_end">#FF7265</color>
     <color name="whiteStartBtn">#ECECEC</color>
     <color name="whiteStartBtnPressed">#ACA9A9</color>
     <color name="backBtn">#F80F0F</color>

@@ -26,7 +26,12 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
 {
     static ArrayList<Fragment> fragmentArrayList;
 
-    static {
+    //dpi (mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi) - плотность экрана 800х400, 1280х720, 1920х1080
+    //long (16:9, 18:9, >18:9, 21:9, 19:9, 18.5:9)
+    //sw-600dp - true!
+
+    static
+    {
         fragmentArrayList = new ArrayList<>();
         fragmentArrayList.add(new HelloFragment());
         fragmentArrayList.add(new NameFragment());
@@ -41,42 +46,17 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event)
     {
-        AppCompatEditText valueEditText = findViewById(R.id.set_value);
-
-        if (valueEditText != null)
+        if (keyCode == KeyEvent.KEYCODE_ENTER)
         {
-            if (keyCode == KeyEvent.KEYCODE_ENTER)
-            {
-                //                    int w;
-
-//                    if (valueEditText.length() == 0)
-//                    {
-//                        w = 0;
-//                    } else
-//                    {
-//                        w = Integer.parseInt(valueEditText.getText().toString());
-//                    }
-//
-//                    if (w > 200)
-//                    {
-//                        valueEditText.setText("200");
-//                    } else if (w < 20)
-//                    {
-//                        valueEditText.setText("30");
-//                    }
-
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(valueEditText.getWindowToken(), 0);
-                valueEditText.clearFocus();
-                return true;
-            }
+            return editTextClosingHandle();
         }
 
         return false;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
 
@@ -89,36 +69,53 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
             @Override
             public boolean onTouch(View v, MotionEvent event)
             {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-                if (imm != null && !(v instanceof  AppCompatEditText))
-                {
-                    AppCompatEditText valueEditText = findViewById(R.id.set_value);
-                    imm.hideSoftInputFromWindow(valueEditText.getWindowToken(), 0);
-                    valueEditText.clearFocus();
-                    return true;
-                }
-
-                return false;
+                return editTextClosingHandle();
             }
         });
         viewPager2.setAdapter(yuliasAdapter);
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event)
-//    {
-//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//        if (imm != null && imm.isActive())
-//        {
-//            AppCompatEditText valueEditText = findViewById(R.id.set_value);
-//
-//            imm.hideSoftInputFromWindow(valueEditText.getWindowToken(), 0);
-//            valueEditText.clearFocus();
-//            return true;
-//        }
-//
-//        return false;
-//    }
+    private boolean editTextClosingHandle()
+    {
+        AppCompatEditText valueEditText = findViewById(R.id.set_value);
+        if (valueEditText != null)
+        {
+            int value;
+
+            if (valueEditText.length() == 0)
+            {
+                value = 0;
+            } else
+            {
+                value = Integer.parseInt(valueEditText.getText().toString());
+            }
+
+            if (valueEditText.getTag().toString().equals("height"))
+            {
+                if (value > getResources().getInteger(R.integer.max_height))
+                {
+                    valueEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_height)));
+                } else if (value < getResources().getInteger(R.integer.min_height))
+                {
+                    valueEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_height)));
+                }
+            } else
+            {
+                if (value > getResources().getInteger(R.integer.max_weight))
+                {
+                    valueEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_weight)));
+                } else if (value < getResources().getInteger(R.integer.min_weight))
+                {
+                    valueEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_weight)));
+                }
+            }
+
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(valueEditText.getWindowToken(), 0);
+            valueEditText.clearFocus();
+            return true;
+        }
+
+        return false;
+    }
 }

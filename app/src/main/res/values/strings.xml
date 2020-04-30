@@ -9,15 +9,12 @@
     <string name="now_weight">Текущий вес</string>
     <string name="desired_weight">Желаемый вес</string>
     <string name="height">Рост</string>
-
-
-    <string name="app__name">Test</string>
     <string name="click_me">Click me</string>
     <string name="text">Hello!</string>
     <string name="sex_choose">Твой пол</string>
     <string name="date_choose">Дата рождения</string>
-    <string name="default_weight">60</string>
-    <string name="default_height">60</string>
+    <string name="default_weight">55</string>
+    <string name="default_height">175</string>
     <string name="set_name">Твоё имя</string>
     <string name="set_lifestyle">Образ жизни</string>
     <string name="set_name_hint">Пиши здесь…</string>
@@ -27,6 +24,8 @@
     <string name="lifestyle_low">Мало двигаюсь</string>
     <string name="lifestyle_medium">Люблю гулять или просто часто передвигаюсь</string>
     <string name="lifestyle_high">Я тренируюсь в спортзале</string>
+    <string name="heightEditTag">height</string>
+    <string name="weightEditTag">weight</string>
 
-    <string name="fontName">monstserrat_regular.ttf</string>
+<!--    <string name="fontName">monstserrat_regular.ttf</string>-->
 </resources>

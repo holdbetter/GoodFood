@@ -23,56 +23,107 @@ import androidx.viewpager2.widget.ViewPager2;
 
 public class WeightFragment extends Fragment
 {
-    private boolean isLongPress;
-    private int timeout = 50;
+    private int timeout = 600;
     private AppCompatEditText weightEditText;
     private int weightInteger;
-    private int stopPlus = -1;
-    private int stopMinus = -1;
-    private Handler handler;
+    private Handler handler = new Handler();
+    private Runnable changeValueTask;
+    private int minWeight;
+    private int maxWeight;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        minWeight = getResources().getInteger(R.integer.min_weight);
+        maxWeight = getResources().getInteger(R.integer.max_weight);
+
         final View weightView = inflater.inflate(R.layout.weight_fragment, container, false);
         final ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
-        FrameLayout plus_btn = weightView.findViewById(R.id.plus_layout);
-        FrameLayout minus_btn = weightView.findViewById(R.id.minus_layout);
+        final FrameLayout plus_btn = weightView.findViewById(R.id.plus_layout);
+        final FrameLayout minus_btn = weightView.findViewById(R.id.minus_layout);
 
         weightEditText = weightView.findViewById(R.id.set_value);
         weightEditText.addTextChangedListener(new TextValueChangedListener());
-//        weightEditText.setOnClickListener();
+
+        changeValueTask = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                if (plus_btn.isPressed())
+                {
+                    weightInteger++;
+                    if (weightInteger > maxWeight)
+                    {
+                        weightInteger = minWeight;
+                    }
+                }
+
+                if (minus_btn.isPressed())
+                {
+                    weightInteger--;
+                    if (weightInteger < minWeight)
+                    {
+                        weightInteger = maxWeight;
+                    }
+                }
+
+                weightEditText.setText(String.valueOf(weightInteger));
+
+                if (timeout > 200)
+                {
+                    timeout -= 65;
+                }
+
+                handler.postDelayed(changeValueTask, timeout);
+            }
+        };
 
         weightInteger = getWeightValue();
 
-        //simpleIncresing
-        plus_btn.setOnClickListener(new View.OnClickListener()
+        plus_btn.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
-            public void onClick(View v)
+            public boolean onTouch(View v, MotionEvent event)
             {
-                weightInteger++;
-                weightEditText.setText(String.valueOf(weightInteger));
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !minus_btn.isPressed())
+                {
+                    weightInteger = getWeightValue();
+                    plus_btn.setPressed(true);
+                    changeValueRunner();
+                    return true;
+                } else if (event.getAction() != MotionEvent.ACTION_MOVE)
+                {
+                    handler.removeCallbacks(changeValueTask);
+                    timeout = 600;
+                    plus_btn.setPressed(false);
+                    return true;
+                }
+
+                return false;
             }
         });
 
-        minus_btn.setOnClickListener(new View.OnClickListener()
+        minus_btn.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
-            public void onClick(View v)
+            public boolean onTouch(View v, MotionEvent event)
             {
-                weightInteger--;
-                weightEditText.setText(String.valueOf(weightInteger));
-            }
-        });
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !plus_btn.isPressed())
+                {
+                    minus_btn.setPressed(true);
+                    changeValueRunner();
+                    return true;
+                } else if (event.getAction() != MotionEvent.ACTION_MOVE)
+                {
+                    handler.removeCallbacks(changeValueTask);
+                    timeout = 600;
+                    minus_btn.setPressed(false);
+                    return true;
+                }
 
-        weightEditText.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                weightEditText.requestFocus();
+                return false;
             }
         });
 
@@ -81,14 +132,38 @@ public class WeightFragment extends Fragment
             @Override
             public boolean onTouch(View v, MotionEvent event)
             {
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-                if (!(v instanceof EditText) && imm.isActive())
+                if (!(v instanceof EditText) && weightEditText.hasFocus())
                 {
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    int value = 0;
+
+                    try
+                    {
+                        value = Integer.parseInt(weightEditText.getText().toString());
+                    } catch (NumberFormatException ignored)
+                    {
+                        value = 0;
+                    }
+
+                    if (value > getResources().getInteger(R.integer.max_weight))
+                    {
+                        weightEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_weight)));
+                    } else if (value < getResources().getInteger(R.integer.min_weight))
+                    {
+                        weightEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_weight)));
+                    }
+
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    View focucedView = getActivity().getCurrentFocus();
+                    if (focucedView == null)
+                    {
+                        focucedView = new View(getActivity());
+                    }
+                    imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
+                    weightEditText.clearFocus();
                     v.performClick();
                     return true;
                 }
+
                 return false;
             }
         });
@@ -97,33 +172,24 @@ public class WeightFragment extends Fragment
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
         return weightView;
+    }
 
-        //        handler = new Handler();
-//        final Runnable r = new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                minusWeight(1000);
-//            }
-//        };
-
-        //timer ???
-//        plus_btn.setOnTouchListener(new PlusButtonListenerSetup());
-//        minus_btn.setOnTouchListener(new MinusButtonListenerSetup());
+    private void changeValueRunner()
+    {
+        changeValueTask.run();
     }
 
     private int getWeightValue()
     {
         if (weightEditText.getText() == null)
         {
-            return 30;
+            return minWeight;
         } else if (weightEditText.getText().length() == 0)
         {
-            return 30;
+            return minWeight;
         } else
         {
-            int result = 30;
+            int result = minWeight;
 
             try
             {
@@ -133,14 +199,15 @@ public class WeightFragment extends Fragment
                 return result;
             }
 
-            if (result < 31 || result > 150)
+            if (result < minWeight || result > maxWeight)
             {
-                result = 30;
+                result = minWeight;
             }
 
             return result;
         }
     }
+
 
     private class GoNextButton implements View.OnTouchListener
     {
@@ -203,120 +270,8 @@ public class WeightFragment extends Fragment
 
             if (s.length() == 0)
             {
-                weightEditText.setText("0");
+                weightEditText.setText(String.valueOf(minWeight));
             }
         }
     }
-
-    //    private void plusWeight(int magnifier)
-//    {
-//        if (magnifier > 200)
-//        {
-//            magnifier -= 100;
-//        }
-//
-//        final int magn = magnifier;
-//
-//        handler.postDelayed(new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                if (stopPlus != 0)
-//                {
-//                    weightInteger = getWeightValue();
-//                    weightInteger += 1;
-//                    weightEditText.setText(weightInteger + "");
-//
-//                    plusWeight(magn);
-//                }
-//
-//            }
-//        }, magnifier);
-//    }
-
-//    private void minusWeight(int magnifier)
-//    {
-//        if (magnifier > 200)
-//        {
-//            magnifier -= 100;
-//        }
-//
-//        final int magn = magnifier;
-//
-//        handler.postDelayed(new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                if (stopMinus != 0)
-//                {
-//                    weightInteger = getWeightValue();
-//                    weightInteger -= 1;
-//                    weightEditText.setText(weightInteger + "");
-//
-//                    minusWeight(magn);
-//                }
-//
-//            }
-//        }, magnifier);
-//    }
-
-//    private class MinusButtonListenerSetup implements View.OnTouchListener
-//    {
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event)
-//        {
-//            switch (event.getAction())
-//            {
-//                case MotionEvent.ACTION_DOWN:
-//                    stopMinus = 0;
-//                    stopPlus = 0;
-//                    weightInteger = getWeightValue();
-//                    weightInteger -= 1;
-//                    weightEditText.setText(weightInteger + "");
-//
-//                    stopMinus = -1;
-//                    minusWeight(1000);
-//                    return true;
-//                case MotionEvent.ACTION_UP:
-//                    stopMinus = 0;
-//                    return true;
-//                case MotionEvent.ACTION_MOVE:
-//                    return false;
-//                default:
-//                    stopMinus = 0;
-//                    return false;
-//            }
-//        }
-//    }
-
-//    private class PlusButtonListenerSetup implements View.OnTouchListener
-//    {
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event)
-//        {
-//            switch (event.getAction())
-//            {
-//                case MotionEvent.ACTION_DOWN:
-//                    stopPlus = 0;
-//                    stopMinus = 0;
-//                    weightInteger = getWeightValue();
-//                    weightInteger += 1;
-//                    weightEditText.setText(weightInteger + "");
-//
-//                    stopPlus = -1;
-//                    plusWeight(1000);
-//                    return true;
-//                case MotionEvent.ACTION_UP:
-//                    stopPlus = 0;
-//                    return true;
-//                case MotionEvent.ACTION_MOVE:
-//                    return false;
-//                default:
-//                    stopMinus = 0;
-//                    return false;
-//            }
-//        }
-//    }
 }
