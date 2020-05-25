@@ -20,12 +20,16 @@ import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDayPicker;
 import com.aigestudio.wheelpicker.widgets.WheelMonthPicker;
 import com.aigestudio.wheelpicker.widgets.WheelYearPicker;
+import com.example.goodfood.database.UserEntity;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class DateFragment extends Fragment
 {
     private WheelDayPicker wheelDayPicker;
+    private WheelMonthPicker wheelMonthPicker;
+    private WheelYearPicker wheelYearPicker;
     private int currentYear;
     private int currentMonth;
     private int currentDay;
@@ -45,8 +49,8 @@ public class DateFragment extends Fragment
         View dateView = inflater.inflate(R.layout.date_fragment, container, false);
 
         wheelDayPicker = dateView.findViewById(R.id.dayPicker);
-        WheelMonthPicker wheelMonthPicker = dateView.findViewById(R.id.monthPicker);
-        WheelYearPicker wheelYearPicker = dateView.findViewById(R.id.yearPicker);
+        wheelMonthPicker = dateView.findViewById(R.id.monthPicker);
+        wheelYearPicker = dateView.findViewById(R.id.yearPicker);
 
         wheelSetup(wheelDayPicker, wheelMonthPicker, wheelYearPicker);
 
@@ -98,6 +102,21 @@ public class DateFragment extends Fragment
         }
     }
 
+    public long getDateInMillis()
+    {
+        if (wheelYearPicker != null)
+        {
+            int day = wheelDayPicker.getCurrentDay();
+            int month = wheelMonthPicker.getCurrentMonth();
+            int year = wheelYearPicker.getCurrentYear();
+
+            return new GregorianCalendar(year, month - 1, day).getTimeInMillis();
+        }
+        else {
+            return new GregorianCalendar().getTimeInMillis();
+        }
+    }
+
     private class GoNextButton implements View.OnTouchListener
     {
         private final ViewPager2 vp2;
@@ -118,9 +137,6 @@ public class DateFragment extends Fragment
                     v.performClick();
                     return true;
                 case MotionEvent.ACTION_UP:
-                    Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
-                    Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
-                    Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
                     if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
                     {
                         vp2.setCurrentItem(vp2.getCurrentItem() + 1);

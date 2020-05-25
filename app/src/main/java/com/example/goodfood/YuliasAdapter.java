@@ -1,17 +1,20 @@
 package com.example.goodfood;
 
+import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class YuliasAdapter extends FragmentStateAdapter
 {
-    private ArrayList<Fragment> list;
+    private List<Fragment> list;
 
-    YuliasAdapter(@NonNull FragmentActivity fragmentActivity, ArrayList<Fragment> uni)
+    YuliasAdapter(@NonNull FragmentActivity fragmentActivity, List<Fragment> uni)
     {
         super(fragmentActivity);
         list = uni;
@@ -28,5 +31,10 @@ public class YuliasAdapter extends FragmentStateAdapter
     public int getItemCount()
     {
         return list.size();
+    }
+
+    public List<Fragment> getFragmentList()
+    {
+        return list;
     }
 }

@@ -1,7 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="RegistrationTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">
+            @color/colorPrimaryRegistration
+        </item>
+        <item name="colorPrimaryDark">
+            @color/colorPrimaryDarkRegistration
+        </item>
+        <item name="colorAccent">
+            @color/colorPrimaryDarkRegistration
+        </item>
+        <item name="android:textColor">
+            @color/text_hello
+        </item>
+
+    </style>
+
+    <style name="MainTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">
             @color/colorPrimary
@@ -10,12 +27,25 @@
             @color/colorPrimaryDark
         </item>
         <item name="colorAccent">
-            @color/colorPrimaryDark
+            @color/colorAccent
         </item>
         <item name="android:textColor">
             @color/text_hello
         </item>
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/modal_bottom_background</item>
+    </style>
+
 
     <style name="HelloFragmentDefault">
         <item name="android:paddingLeft">
@@ -80,7 +110,7 @@
         </item>
     </style>
 
-    <style name="EditTextNameSet" parent="@style/AppTheme">
+    <style name="EditTextNameSet" parent="@style/RegistrationTheme">
         <item name="android:textColor">
             @color/text_name
         </item>
@@ -110,7 +140,7 @@
         </item>
     </style>
 
-    <style name="ValueEditText" parent="@style/AppTheme">
+    <style name="ValueEditText" parent="@style/RegistrationTheme">
         <item name="android:background">
             @null
         </item>
@@ -171,6 +201,18 @@
         </item>
         <item name="android:textAllCaps">
             false
+        </item>
+    </style>
+
+    <style name="CheckTextViewsItem">
+        <item name="android:fontFamily">
+            @font/montserrat_medium
+        </item>
+        <item name="android:textSize">
+            16sp
+        </item>
+        <item name="android:textColor">
+            @color/text_dafault_color
         </item>
     </style>
 

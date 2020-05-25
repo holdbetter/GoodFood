@@ -20,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 public class NameFragment extends Fragment
 {
     private ViewPager2 vp2;
+    private AppCompatEditText nameSet;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -32,8 +33,7 @@ public class NameFragment extends Fragment
         ButtonWithCustomBackground nextBtn = nameView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
-
-        final AppCompatEditText nameSet = nameView.findViewById(R.id.set_value);
+        nameSet = nameView.findViewById(R.id.set_value);
 
         nameSet.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
@@ -75,6 +75,21 @@ public class NameFragment extends Fragment
         return nameView;
     }
 
+    public String getNameValue()
+    {
+        if (nameSet != null )
+        {
+            if (nameSet.getText() != null && nameSet.getText().length() > 0)
+            {
+                return nameSet.getText().toString();
+            }
+            return "Не указано";
+        }
+        {
+            return "Не указано";
+        }
+    }
+
     private class GoNextButton implements View.OnTouchListener
     {
         private final ViewPager2 vp2;
@@ -96,6 +111,7 @@ public class NameFragment extends Fragment
                     Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
                     Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
                     Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
+
                     if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
                     {
                         vp2.setCurrentItem(vp2.getCurrentItem() + 1);

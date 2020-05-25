@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">
+    <color name="colorPrimaryRegistration">
         #FF956F
     </color>
-    <color name="colorPrimaryDark">
+    <color name="colorPrimaryDarkRegistration">
         #ED8060
     </color>
-    <color name="colorAccent">
+    <color name="colorAccentRegistration">
         #FF624D
+    </color>
+    <color name="colorPrimary">
+        #FFFFFF
+    </color>
+    <color name="colorPrimaryDark">
+        #454545
+    </color>
+    <color name="colorAccent">
+        #FF956F
     </color>
     <color name="background_grad_start">
         #FF956F
@@ -50,5 +59,11 @@
     </color>
     <color name="dateItem">
         #FFFFFF
+    </color>
+    <color name="tabUnselectedColor">
+        #F1BFB0
+    </color>
+    <color name="tabSelectedColor">
+        #FF8D69
     </color>
 </resources>

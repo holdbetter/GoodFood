@@ -20,6 +20,8 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.goodfood.database.UserEntity;
+
 public class HeightFragment extends Fragment
 {
     private int timeout = 600;
@@ -171,27 +173,6 @@ public class HeightFragment extends Fragment
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
         return heightView;
-
-        //simpleIncresing
-//        plus_btn.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                heightInteger++;
-//                heightEditText.setText(String.valueOf(heightInteger));
-//            }
-//        });
-
-        //        minus_btn.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                heightInteger--;
-//                heightEditText.setText(String.valueOf(heightInteger));
-//            }
-//        });
     }
 
     private void changeValueRunner()
@@ -199,32 +180,39 @@ public class HeightFragment extends Fragment
         changeValueTask.run();
     }
 
-    private int getHeightValue()
+    public int getHeightValue()
     {
-        if (heightEditText.getText() == null)
+        if (heightEditText != null)
         {
-            return minHeight;
-        } else if (heightEditText.getText().length() == 0)
-        {
-            return minHeight;
-        } else
-        {
-            int result = minHeight;
+            if (heightEditText.getText() == null)
+            {
+                return minHeight;
+            } else if (heightEditText.getText().length() == 0)
+            {
+                return minHeight;
+            } else
+            {
+                int result = minHeight;
 
-            try
-            {
-                result = Integer.parseInt(heightEditText.getText().toString());
-            } catch (NumberFormatException ignored)
-            {
+                try
+                {
+                    result = Integer.parseInt(heightEditText.getText().toString());
+                } catch (NumberFormatException ignored)
+                {
+                    return result;
+                }
+
+                if (result < minHeight || result > maxHeight)
+                {
+                    result = minHeight;
+                }
+
                 return result;
             }
-
-            if (result < minHeight || result > maxHeight)
-            {
-                result = minHeight;
-            }
-
-            return result;
+        }
+        else
+        {
+            return 0;
         }
     }
 

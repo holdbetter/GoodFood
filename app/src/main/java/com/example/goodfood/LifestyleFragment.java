@@ -2,6 +2,7 @@ package com.example.goodfood;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.DeadObjectException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.goodfood.database.UserEntity;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,43 @@ public class LifestyleFragment extends Fragment
         return lifestyleFragment;
     }
 
+    public String getLifestyleString()
+    {
+        if (selectedButtons.size() > 0)
+        {
+           return selectedButtons.get(0).getText().toString();
+        }
+        else
+        {
+            return "Не выбран";
+        }
+    }
+
+    public double getLifestyleValue()
+    {
+        if (selectedButtons.size() > 0)
+        {
+            switch (selectedButtons.get(0).getText().toString())
+            {
+                case "Я - амембка и не делаю лишних движений":
+                    return 1.2;
+                case "Мало двигаюсь":
+                    return 1.375;
+                case "Люблю гулять или просто часто передвигаюсь":
+                    return 1.6;
+                case "Я тренируюсь в спортзале":
+                    return 1.8;
+                default:
+                    return 1.0;
+            }
+        }
+        else
+        {
+            return 1.0;
+        }
+    }
+
+
     private class GoNextButton implements View.OnTouchListener
     {
         private final ViewPager2 vp2;
@@ -61,9 +101,6 @@ public class LifestyleFragment extends Fragment
                     v.setBackground(getResources().getDrawable(R.drawable.next_button_pressed));
                     return true;
                 case MotionEvent.ACTION_UP:
-                    Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
-                    Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
-                    Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
                     if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
                     {
                         vp2.setCurrentItem(vp2.getCurrentItem() + 1);

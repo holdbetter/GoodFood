@@ -22,6 +22,7 @@ public class SexFragment extends Fragment
     private boolean isWomanSelected = false;
     private boolean isManSelected = false;
 
+
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
@@ -82,6 +83,21 @@ public class SexFragment extends Fragment
 
         oldImage.setAlpha(0.3f);
         oldText.setAlpha(0.3f);
+    }
+
+    public String getSexValue()
+    {
+        if (isWomanSelected)
+        {
+            return "Женский";
+        } else if (isManSelected)
+        {
+            return "Мужской";
+        }
+        else
+        {
+            return "Пол не указан";
+        }
     }
 
     private class WomanPressed implements View.OnClickListener
@@ -174,9 +190,6 @@ public class SexFragment extends Fragment
                     v.setBackground(getResources().getDrawable(R.drawable.next_button_pressed));
                     return true;
                 case MotionEvent.ACTION_UP:
-                    Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
-                    Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
-                    Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
                     if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
                     {
                         vp2.setCurrentItem(vp2.getCurrentItem() + 1);

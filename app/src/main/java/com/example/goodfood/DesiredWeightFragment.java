@@ -21,6 +21,8 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.goodfood.database.UserEntity;
+
 public class DesiredWeightFragment extends Fragment
 {
     private int timeout = 600;
@@ -179,32 +181,39 @@ public class DesiredWeightFragment extends Fragment
         changeValueTask.run();
     }
 
-    private int getWeightValue()
+    public int getWeightValue()
     {
-        if (weightEditText.getText() == null)
+        if (weightEditText != null)
         {
-            return minWeight;
-        } else if (weightEditText.getText().length() == 0)
-        {
-            return minWeight;
-        } else
-        {
-            int result = minWeight;
+            if (weightEditText.getText() == null)
+            {
+                return minWeight;
+            } else if (weightEditText.getText().length() == 0)
+            {
+                return minWeight;
+            } else
+            {
+                int result = minWeight;
 
-            try
-            {
-                result = Integer.parseInt(weightEditText.getText().toString());
-            } catch (NumberFormatException ignored)
-            {
+                try
+                {
+                    result = Integer.parseInt(weightEditText.getText().toString());
+                } catch (NumberFormatException ignored)
+                {
+                    return result;
+                }
+
+                if (result < minWeight || result > maxWeight)
+                {
+                    result = minWeight;
+                }
+
                 return result;
             }
-
-            if (result < minWeight || result > maxWeight)
-            {
-                result = minWeight;
-            }
-
-            return result;
+        }
+        else
+        {
+            return 0;
         }
     }
 
@@ -226,9 +235,6 @@ public class DesiredWeightFragment extends Fragment
                     v.setBackground(getResources().getDrawable(R.drawable.next_button_pressed));
                     return true;
                 case MotionEvent.ACTION_UP:
-                    Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
-                    Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
-                    Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
                     if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
                     {
                         vp2.setCurrentItem(vp2.getCurrentItem() + 1);
