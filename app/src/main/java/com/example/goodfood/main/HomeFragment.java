@@ -323,7 +323,15 @@ public class HomeFragment extends Fragment
             }
         });
 
-        WaterEntity waterLastData = database.waterDao().getLastWater();
+        Calendar calendarOffset = (Calendar) currentDateShowing.clone();
+        calendarOffset.set(Calendar.HOUR_OF_DAY, 0);
+        calendarOffset.set(Calendar.MINUTE, 0);
+        calendarOffset.set(Calendar.SECOND, 0);
+        calendarOffset.set(Calendar.MILLISECOND, 0);
+        calendarOffset.setTimeInMillis(calendarOffset.getTimeInMillis() - MainActivity.getPhoneTimezoneOffset());
+        Calendar nextDay = (Calendar) calendarOffset.clone();
+        nextDay.roll(Calendar.DAY_OF_YEAR, 1);
+        WaterEntity waterLastData = database.waterDao().getLastWater(calendarOffset.getTimeInMillis(), nextDay.getTimeInMillis());
         TextView lastWaterUpdateTime = bottomSheetDialog.findViewById(R.id.lastWaterUpdateTime);
         TextView lastWaterUpdateCount = bottomSheetDialog.findViewById(R.id.lastWaterUpdateCount);
         TextView totalMl = bottomSheetDialog.findViewById(R.id.totalMl);
@@ -355,7 +363,7 @@ public class HomeFragment extends Fragment
             switch (v.getTag().toString())
             {
                 case "1":
-                    if (user.yesterdayWeight - 0.1 > 30.0)
+                    if (user.yesterdayWeight - 0.1 >= 30.0)
                     {
                         BigDecimal yesterdayWeight = new BigDecimal(String.valueOf(user.yesterdayWeight));
                         yesterdayWeight = yesterdayWeight.subtract(new BigDecimal("0.1"));
@@ -372,7 +380,7 @@ public class HomeFragment extends Fragment
                     }
                     return;
                 case "2":
-                    if (user.weight - 0.1 > 30.0)
+                    if (user.weight - 0.1 >= 30.0)
                     {
                         BigDecimal todayWeight = new BigDecimal(String.valueOf(user.weight));
                         todayWeight = todayWeight.subtract(new BigDecimal("0.1"));
@@ -389,7 +397,7 @@ public class HomeFragment extends Fragment
                     }
                     return;
                 case "3":
-                    if (user.yesterdayWeight - 0.1 > 30.0)
+                    if (user.yesterdayWeight - 0.1 >= 30.0)
                     {
                         BigDecimal tomorrowWeight = new BigDecimal(String.valueOf(user.desiredWeight));
                         tomorrowWeight = tomorrowWeight.subtract(new BigDecimal("0.1"));
@@ -502,5 +510,4 @@ public class HomeFragment extends Fragment
             }
         }
     }
-
 }

@@ -14,10 +14,12 @@ import java.util.List;
 @Dao
 public abstract class FoodDao
 {
-    @Query("SELECT * FROM food_info WHERE food_name = :foodName")
-    public abstract List<FoodEntity> getFoodInfo(String foodName);
+    @Query("SELECT * FROM food_info ORDER BY food_name")
+    public abstract List<FoodEntity> getFoodInfoList();
     @Query("SELECT COUNT(*) FROM food_info")
     public abstract int getFoodInfoCount();
+    @Query("SELECT DISTINCT category_name FROM food_info ORDER BY category_name")
+    public abstract List<String> getFoodCategories();
     @Update
     public abstract int updateFoodInfo(FoodEntity... foodInfo);
     @Insert(onConflict = OnConflictStrategy.REPLACE)

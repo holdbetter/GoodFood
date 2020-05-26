@@ -15,8 +15,8 @@ public abstract class WaterDao
     public abstract List<WaterEntity> getWaterForThisDate(long searchingCleanedDate, long nextDate);
     @Query("SELECT SUM(water_ml) as ml FROM water WHERE water_date >= :searchingCleanedDate AND water_date < :nextDate")
     public abstract TotalWater getMlCountForThisDate(long searchingCleanedDate, long nextDate);
-    @Query("SELECT * FROM water ORDER BY water_id DESC LIMIT 1")
-    public abstract WaterEntity getLastWater();
+    @Query("SELECT * FROM water WHERE water_date >= :searchingCleanedDate AND water_date < :nextDate ORDER BY water_id DESC LIMIT 1")
+    public abstract WaterEntity getLastWater(long searchingCleanedDate, long nextDate);
     @Update
     public abstract int update(WaterEntity... water);
     @Insert(onConflict = OnConflictStrategy.REPLACE)

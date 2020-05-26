@@ -5,12 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.goodfood.DesiredWeightFragment;
-import com.example.goodfood.HeightFragment;
-import com.example.goodfood.HelloFragment;
 import com.example.goodfood.MainActivity;
-import com.example.goodfood.NameFragment;
-import com.example.goodfood.WeightFragment;
+import com.example.goodfood.database.FoodEntity;
 import com.example.goodfood.database.UserEntity;
 
 import java.util.ArrayList;
@@ -26,10 +22,12 @@ public class MainFragmentTabAdapter extends FragmentStateAdapter
 
         MainActivity activity = (MainActivity) fragmentActivity;
         UserEntity user = activity.database.userDao().getUserInfo();
+        List<String> foodCategories = activity.database.foodDao().getFoodCategories();
+        List<FoodEntity> foodInfoList = activity.database.foodDao().getFoodInfoList();
 
+        fragments.add(new StatsFragment());
         fragments.add(new HomeFragment(user, activity.database));
-        fragments.add(new HomeFragment(user, activity.database));
-        fragments.add(new HomeFragment(user, activity.database));
+        fragments.add(new AddFoodFragment(foodCategories, foodInfoList));
     }
 
     @NonNull

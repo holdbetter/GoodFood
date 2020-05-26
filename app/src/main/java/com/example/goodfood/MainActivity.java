@@ -21,6 +21,7 @@ import com.example.goodfood.database.UserEntity;
 import com.example.goodfood.main.MainPagerFragment;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.ThreadFactory;
 

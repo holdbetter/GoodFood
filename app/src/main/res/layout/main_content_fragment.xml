@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="56dp"
+            app:layout_scrollFlags="enterAlways|scroll|snap"
             style="@style/Widget.MaterialComponents.TabLayout"
             app:tabIconTint="@color/main_tab_selector"
             app:tabIndicatorColor="@color/tabSelectedColor"

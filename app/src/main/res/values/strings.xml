@@ -28,6 +28,17 @@
     <string name="lifestyle_high">Я тренируюсь в спортзале</string>
     <string name="heightEditTag">height</string>
     <string name="weightEditTag">weight</string>
+    <string name="not_ready_text">Здесь пока ведутся работы</string>
+    <string name="choose_food_from_list">Или выбери из списка:</string>
+    <string name="add_your_own_food">Добавь свою еду</string>
+    <string name="food_hint_count">0</string>
+    <string name="food_hint_name">Название</string>
+    <string name="default_gramm_item">100 г</string>
+    <string name="belki_dc">белки</string>
+    <string name="zhir_dc">жиры</string>
+    <string name="ugl_dc">углеводы</string>
+    <string name="kkal_dc">ккал</string>
+    <string name="choose_food_item">Выбрать</string>
 
     <!--    <string name="fontName">monstserrat_regular.ttf</string>-->
 </resources>
