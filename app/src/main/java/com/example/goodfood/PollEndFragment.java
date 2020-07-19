@@ -46,20 +46,15 @@ public class PollEndFragment extends Fragment
     private List<LinearLayout> linears = new ArrayList<>();
     private int positionCheck;
     private Handler handler;
-    private Runnable task;
     private ViewPager2 vp2;
     private UserEntity user;
-
-    public PollEndFragment(UserEntity user)
-    {
-        this.user = user;
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         handler = new Handler();
+        user = new UserEntity();
         View pollEndFragment = inflater.inflate(R.layout.poll_end_fragment, container, false);
 
         vp2 = getActivity().findViewById(R.id.viewPager);
@@ -213,18 +208,13 @@ public class PollEndFragment extends Fragment
         @Override
         public boolean onTouch(View v, MotionEvent event)
         {
-            Button btn = (Button) v;
+            Button nextBtn = (Button) v;
             switch (event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
                     v.setBackground(getResources().getDrawable(R.drawable.next_button_pressed));
                     return true;
                 case MotionEvent.ACTION_UP:
-
-                    Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
-                    Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
-                    Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
-
                     if (checkNext())
                     {
                         registerUser(user);
@@ -235,7 +225,7 @@ public class PollEndFragment extends Fragment
 
                         if (positionCheck + 1 < linears.size())
                         {
-                            task = new Runnable()
+                            Runnable task = new Runnable()
                             {
                                 int positionSafety = positionCheck + 1;
 
@@ -250,7 +240,7 @@ public class PollEndFragment extends Fragment
                             handler.postDelayed(task, 200);
                         } else
                         {
-                            btn.setText("УСПЕХ");
+                            nextBtn.setText("ЗАВЕРШИТЬ");
                         }
 
                         v.setBackground(getResources().getDrawable(R.drawable.next_button_def));

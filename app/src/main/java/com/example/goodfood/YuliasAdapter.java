@@ -25,7 +25,7 @@ public class YuliasAdapter extends FragmentStateAdapter
         fragmentList.add(new WeightFragment());
         fragmentList.add(new DesiredWeightFragment());
         fragmentList.add(new LifestyleFragment());
-        fragmentList.add(new PollEndFragment(new UserEntity()));
+        fragmentList.add(new PollEndFragment());
     }
 
     @NonNull
