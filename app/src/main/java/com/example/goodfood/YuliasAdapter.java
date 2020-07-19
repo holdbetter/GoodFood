@@ -16,6 +16,7 @@ public class YuliasAdapter extends FragmentStateAdapter
     public YuliasAdapter(@NonNull Fragment fragment)
     {
         super(fragment);
+
         fragmentList.add(new HelloFragment());
         fragmentList.add(new NameFragment());
         fragmentList.add(new SexFragment());

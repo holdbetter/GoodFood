@@ -19,26 +19,28 @@ import java.util.ArrayList;
 
 public class LifestyleFragment extends Fragment
 {
-    private ArrayList<AppCompatButton> selectedButtons = new ArrayList<>();
+    private ArrayList<AppCompatButton> selectedButtons;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        selectedButtons = new ArrayList<>();
+
         View lifestyleFragment = inflater.inflate(R.layout.lifestyle_fragment, container, false);
         ButtonWithCustomBackground nextBtn = lifestyleFragment.findViewById(R.id.buttonGo);
-        final AppCompatButton lifestyleUnderneath = lifestyleFragment.findViewById(R.id.lifestyleUnderneath);
-        final AppCompatButton lifestyleLow = lifestyleFragment.findViewById(R.id.lifestyleLow);
-        final AppCompatButton lifestyleMedium = lifestyleFragment.findViewById(R.id.lifestyleMedium);
-        final AppCompatButton lifestyleHigh = lifestyleFragment.findViewById(R.id.lifestyleHigh);
+        AppCompatButton lifestyleUnderneath = lifestyleFragment.findViewById(R.id.lifestyleUnderneath);
+        AppCompatButton lifestyleLow = lifestyleFragment.findViewById(R.id.lifestyleLow);
+        AppCompatButton lifestyleMedium = lifestyleFragment.findViewById(R.id.lifestyleMedium);
+        AppCompatButton lifestyleHigh = lifestyleFragment.findViewById(R.id.lifestyleHigh);
 
-        lifestyleUnderneath.setOnTouchListener(new LifestyleSelect(lifestyleUnderneath));
-        lifestyleLow.setOnTouchListener(new LifestyleSelect(lifestyleLow));
-        lifestyleMedium.setOnTouchListener(new LifestyleSelect(lifestyleMedium));
-        lifestyleHigh.setOnTouchListener(new LifestyleSelect(lifestyleHigh));
+        lifestyleUnderneath.setOnTouchListener(new LifestyleSelect());
+        lifestyleLow.setOnTouchListener(new LifestyleSelect());
+        lifestyleMedium.setOnTouchListener(new LifestyleSelect());
+        lifestyleHigh.setOnTouchListener(new LifestyleSelect());
 
-        final ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
+        ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
         return lifestyleFragment;
@@ -46,7 +48,7 @@ public class LifestyleFragment extends Fragment
 
     public String getLifestyleString()
     {
-        if (selectedButtons.size() > 0)
+        if (selectedButtons != null && selectedButtons.size() > 0)
         {
            return selectedButtons.get(0).getText().toString();
         }
@@ -58,7 +60,7 @@ public class LifestyleFragment extends Fragment
 
     public double getLifestyleValue()
     {
-        if (selectedButtons.size() > 0)
+        if (selectedButtons != null && selectedButtons.size() > 0)
         {
             switch (selectedButtons.get(0).getText().toString())
             {
@@ -82,13 +84,6 @@ public class LifestyleFragment extends Fragment
 
     private class LifestyleSelect implements View.OnTouchListener
     {
-        private final AppCompatButton lifestyleUnderneath;
-
-        public LifestyleSelect(AppCompatButton lifestyleUnderneath)
-        {
-            this.lifestyleUnderneath = lifestyleUnderneath;
-        }
-
         @Override
         public boolean onTouch(View v, MotionEvent event)
         {
@@ -102,7 +97,7 @@ public class LifestyleFragment extends Fragment
                 }
                 selectedButtons.clear();
 
-                lifestyleBtn.setPressed(!lifestyleUnderneath.isPressed());
+                lifestyleBtn.setPressed(true);
 
                 if (lifestyleBtn.isPressed())
                 {

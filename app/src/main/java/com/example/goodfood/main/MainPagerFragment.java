@@ -33,7 +33,7 @@ public class MainPagerFragment extends Fragment
 //        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
 
         View mainContent = inflater.inflate(R.layout.main_content_fragment, container, false);
-        MainFragmentTabAdapter mainFragmentTabAdapter = new MainFragmentTabAdapter(getActivity());
+        MainFragmentTabAdapter mainFragmentTabAdapter = new MainFragmentTabAdapter(this);
         ViewPager2 vp2 = mainContent.findViewById(R.id.viewPager);
         vp2.setAdapter(mainFragmentTabAdapter);
         vp2.setCurrentItem(1);

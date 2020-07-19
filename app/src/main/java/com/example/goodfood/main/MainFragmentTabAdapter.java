@@ -16,11 +16,11 @@ public class MainFragmentTabAdapter extends FragmentStateAdapter
 {
     private List<Fragment> fragments = new ArrayList<>();
 
-    public MainFragmentTabAdapter(@NonNull FragmentActivity fragmentActivity)
+    public MainFragmentTabAdapter(Fragment fragment)
     {
-        super(fragmentActivity);
+        super(fragment);
 
-        MainActivity activity = (MainActivity) fragmentActivity;
+        MainActivity activity = (MainActivity) fragment.getActivity();
         UserEntity user = activity.database.userDao().getUserInfo();
         List<String> foodCategories = activity.database.foodDao().getFoodCategories();
         List<FoodEntity> foodInfoList = activity.database.foodDao().getFoodInfoList();
