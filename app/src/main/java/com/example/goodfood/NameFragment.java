@@ -20,7 +20,6 @@ import com.example.goodfood.services.GoNextButton;
 
 public class NameFragment extends Fragment
 {
-    private ViewPager2 vp2;
     private AppCompatEditText nameSet;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -29,13 +28,12 @@ public class NameFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View nameView = inflater.inflate(R.layout.name_fragment, container, false);
-        vp2 = getActivity().findViewById(R.id.viewPager);
+        ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
 
         ButtonWithCustomBackground nextBtn = nameView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
 
         nameSet = nameView.findViewById(R.id.set_value);
-
         nameSet.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
@@ -51,27 +49,7 @@ public class NameFragment extends Fragment
             }
         });
 
-        nameView.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                if (!(v instanceof EditText) && nameSet.hasFocus())
-                {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    View focucedView = getActivity().getCurrentFocus();
-                    if (focucedView == null)
-                    {
-                        focucedView = new View(getActivity());
-                    }
-                    imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
-                    nameSet.clearFocus();
-                    return true;
-                }
-
-                return false;
-            }
-        });
+        nameView.setOnTouchListener(new OnWholeViewListener());
 
         return nameView;
     }
@@ -88,6 +66,28 @@ public class NameFragment extends Fragment
         }
         {
             return "Не указано";
+        }
+    }
+
+    private class OnWholeViewListener implements View.OnTouchListener
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent event)
+        {
+            if (!(v instanceof EditText) && nameSet.hasFocus())
+            {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                View focucedView = getActivity().getCurrentFocus();
+                if (focucedView == null)
+                {
+                    focucedView = new View(getActivity());
+                }
+                imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
+                nameSet.clearFocus();
+                return true;
+            }
+
+            return false;
         }
     }
 }
