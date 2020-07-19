@@ -169,39 +169,4 @@ public class SexFragment extends Fragment
             }
         }
     }
-
-    private class GoNextButton implements View.OnTouchListener
-    {
-        private final ViewPager2 vp2;
-
-        GoNextButton(ViewPager2 vp2)
-        {
-            this.vp2 = vp2;
-        }
-
-        //ctrl + i
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public boolean onTouch(View v, MotionEvent event)
-        {
-            switch (event.getAction())
-            {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackground(getResources().getDrawable(R.drawable.next_button_pressed));
-                    return true;
-                case MotionEvent.ACTION_UP:
-                    if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
-                    {
-                        vp2.setCurrentItem(vp2.getCurrentItem() + 1);
-                    }
-                    v.setBackground(getResources().getDrawable(R.drawable.next_button_def));
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    v.setBackground(getResources().getDrawable(R.drawable.next_button_def));
-                    return true;
-            }
-
-            return false;
-        }
-    }
 }

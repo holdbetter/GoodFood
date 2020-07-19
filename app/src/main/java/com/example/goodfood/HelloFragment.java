@@ -54,40 +54,4 @@ public class HelloFragment extends Fragment
 
         mediator.attach();
     }
-
-    private class GoNextButton implements View.OnTouchListener
-    {
-        private final ViewPager2 vp2;
-
-        GoNextButton(ViewPager2 vp2)
-        {
-            this.vp2 = vp2;
-        }
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event)
-        {
-            switch (event.getAction())
-            {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackground(getResources().getDrawable(R.drawable.next_button_pressed));
-                    return true;
-                case MotionEvent.ACTION_UP:
-                    Log.i("CHECK_INFO", "ID текущего элемента: " + vp2.getCurrentItem());
-                    Log.i("CHECK_INFO", "ID cледующего элемента: " + (vp2.getCurrentItem() + 1));
-                    Log.i("CHECK_INFO", "всего элементов: " + vp2.getAdapter().getItemCount());
-                    if (vp2.getCurrentItem() < vp2.getAdapter().getItemCount() - 1)
-                    {
-                        vp2.setCurrentItem(vp2.getCurrentItem() + 1);
-                    }
-                    v.setBackground(getResources().getDrawable(R.drawable.next_button_def));
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    v.setBackground(getResources().getDrawable(R.drawable.next_button_def));
-                    return true;
-            }
-
-            return false;
-        }
-    }
 }

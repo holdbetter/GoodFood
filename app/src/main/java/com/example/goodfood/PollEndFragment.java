@@ -35,20 +35,6 @@ import java.util.Locale;
 
 public class PollEndFragment extends Fragment
 {
-    private LinearLayout checkName;
-    private LinearLayout checkSex;
-    private LinearLayout checkDate;
-    private LinearLayout checkHeight;
-    private LinearLayout checkWeight;
-    private LinearLayout checkDesiredWeight;
-    private LinearLayout checkLifestyle;
-    private AppCompatImageView nameReadyImage;
-    private AppCompatImageView sexReadyImage;
-    private AppCompatImageView dateReadyImage;
-    private AppCompatImageView heightReadyImage;
-    private AppCompatImageView weightReadyImage;
-    private AppCompatImageView desiredWeightReadyImage;
-    private AppCompatImageView lifestyleReadyImage;
     private TextView nameCheckText;
     private TextView sexCheckText;
     private TextView dateCheckText;
@@ -59,7 +45,6 @@ public class PollEndFragment extends Fragment
     private List<AppCompatImageView> images = new ArrayList<>();
     private List<LinearLayout> linears = new ArrayList<>();
     private int positionCheck;
-    private NestedScrollView scrollView;
     private Handler handler;
     private Runnable task;
     private ViewPager2 vp2;
@@ -79,21 +64,19 @@ public class PollEndFragment extends Fragment
 
         vp2 = getActivity().findViewById(R.id.viewPager);
         ButtonWithCustomBackground nextBtn = pollEndFragment.findViewById(R.id.buttonGo);
-        nextBtn.setOnTouchListener(new GoNextButton(vp2));
+        nextBtn.setOnTouchListener(new RegisterButton(vp2));
 
         linears.clear();
         images.clear();
         positionCheck = 0;
 
-        scrollView = pollEndFragment.findViewById(R.id.scrollView);
-
-        checkName = pollEndFragment.findViewById(R.id.check_name);
-        checkSex = pollEndFragment.findViewById(R.id.check_sex);
-        checkDate = pollEndFragment.findViewById(R.id.check_date);
-        checkHeight = pollEndFragment.findViewById(R.id.check_height);
-        checkWeight = pollEndFragment.findViewById(R.id.check_weight);
-        checkDesiredWeight = pollEndFragment.findViewById(R.id.check_desired_weight);
-        checkLifestyle = pollEndFragment.findViewById(R.id.check_lifestyle);
+        LinearLayout checkName = pollEndFragment.findViewById(R.id.check_name);
+        LinearLayout checkSex = pollEndFragment.findViewById(R.id.check_sex);
+        LinearLayout checkDate = pollEndFragment.findViewById(R.id.check_date);
+        LinearLayout checkHeight = pollEndFragment.findViewById(R.id.check_height);
+        LinearLayout checkWeight = pollEndFragment.findViewById(R.id.check_weight);
+        LinearLayout checkDesiredWeight = pollEndFragment.findViewById(R.id.check_desired_weight);
+        LinearLayout checkLifestyle = pollEndFragment.findViewById(R.id.check_lifestyle);
 
         linears.add(checkName);
         linears.add(checkSex);
@@ -103,13 +86,13 @@ public class PollEndFragment extends Fragment
         linears.add(checkDesiredWeight);
         linears.add(checkLifestyle);
 
-        nameReadyImage = pollEndFragment.findViewById(R.id.name_checked_image);
-        sexReadyImage = pollEndFragment.findViewById(R.id.sex_checked_image);
-        dateReadyImage = pollEndFragment.findViewById(R.id.date_checked_image);
-        heightReadyImage = pollEndFragment.findViewById(R.id.height_checked_image);
-        weightReadyImage = pollEndFragment.findViewById(R.id.weight_checked_image);
-        desiredWeightReadyImage = pollEndFragment.findViewById(R.id.desired_weight_checked_image);
-        lifestyleReadyImage = pollEndFragment.findViewById(R.id.lifecycle_checked_image);
+        AppCompatImageView nameReadyImage = pollEndFragment.findViewById(R.id.name_checked_image);
+        AppCompatImageView sexReadyImage = pollEndFragment.findViewById(R.id.sex_checked_image);
+        AppCompatImageView dateReadyImage = pollEndFragment.findViewById(R.id.date_checked_image);
+        AppCompatImageView heightReadyImage = pollEndFragment.findViewById(R.id.height_checked_image);
+        AppCompatImageView weightReadyImage = pollEndFragment.findViewById(R.id.weight_checked_image);
+        AppCompatImageView desiredWeightReadyImage = pollEndFragment.findViewById(R.id.desired_weight_checked_image);
+        AppCompatImageView lifestyleReadyImage = pollEndFragment.findViewById(R.id.lifecycle_checked_image);
 
         images.add(nameReadyImage);
         images.add(sexReadyImage);
@@ -218,11 +201,11 @@ public class PollEndFragment extends Fragment
         return true;
     }
 
-    private class GoNextButton implements View.OnTouchListener
+    private class RegisterButton implements View.OnTouchListener
     {
         private final ViewPager2 vp2;
 
-        GoNextButton(ViewPager2 vp2)
+        RegisterButton(ViewPager2 vp2)
         {
             this.vp2 = vp2;
         }
@@ -338,6 +321,7 @@ public class PollEndFragment extends Fragment
             }
         }).start();
     }
+
 
     private void changeStatusBarColor(Activity activity)
     {
