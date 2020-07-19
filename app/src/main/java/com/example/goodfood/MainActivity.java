@@ -86,7 +86,7 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
             }).start();
         } else
         {
-            transaction.replace(R.id.main, new ViewPagerFragment(this)).commit();
+            transaction.replace(R.id.main, new ViewPagerFragment()).commit();
         }
     }
 

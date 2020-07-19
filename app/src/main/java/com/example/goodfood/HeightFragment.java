@@ -20,7 +20,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.goodfood.database.UserEntity;
+import com.example.goodfood.services.GoNextButton;
 
 public class HeightFragment extends Fragment
 {
@@ -128,46 +128,7 @@ public class HeightFragment extends Fragment
             }
         });
 
-        heightView.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                if (!(v instanceof EditText) && heightEditText.hasFocus())
-                {
-                    int value = 0;
-
-                    try
-                    {
-                        value = Integer.parseInt(heightEditText.getText().toString());
-                    } catch (NumberFormatException ignored)
-                    {
-                        value = 0;
-                    }
-
-                    if (value > getResources().getInteger(R.integer.max_height))
-                    {
-                        heightEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_height)));
-                    } else if (value < getResources().getInteger(R.integer.min_height))
-                    {
-                        heightEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_height)));
-                    }
-
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    View focucedView = getActivity().getCurrentFocus();
-                    if (focucedView == null)
-                    {
-                        focucedView = new View(getActivity());
-                    }
-                    imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
-                    heightEditText.clearFocus();
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
+        heightView.setOnTouchListener(new OnWholeViewListener());
 
         ButtonWithCustomBackground nextBtn = heightView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
@@ -242,6 +203,46 @@ public class HeightFragment extends Fragment
             {
                 heightEditText.setText(String.valueOf(minHeight));
             }
+        }
+    }
+
+    private class OnWholeViewListener implements View.OnTouchListener
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent event)
+        {
+            if (!(v instanceof EditText) && heightEditText.hasFocus())
+            {
+                int value = 0;
+
+                try
+                {
+                    value = Integer.parseInt(heightEditText.getText().toString());
+                } catch (NumberFormatException ignored)
+                {
+                    value = 0;
+                }
+
+                if (value > getResources().getInteger(R.integer.max_height))
+                {
+                    heightEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_height)));
+                } else if (value < getResources().getInteger(R.integer.min_height))
+                {
+                    heightEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_height)));
+                }
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                View focucedView = getActivity().getCurrentFocus();
+                if (focucedView == null)
+                {
+                    focucedView = new View(getActivity());
+                }
+                imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
+                heightEditText.clearFocus();
+                return true;
+            }
+
+            return false;
         }
     }
 }

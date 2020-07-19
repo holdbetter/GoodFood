@@ -1,15 +1,17 @@
-package com.example.goodfood;
+package com.example.goodfood.services;
 
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.goodfood.R;
+
 public class GoNextButton implements View.OnTouchListener
 {
     private final ViewPager2 vp2;
 
-    GoNextButton(ViewPager2 vp2)
+    public GoNextButton(ViewPager2 vp2)
     {
         this.vp2 = vp2;
     }

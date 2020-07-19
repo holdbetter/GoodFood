@@ -2,9 +2,7 @@ package com.example.goodfood;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,7 +18,7 @@ import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDayPicker;
 import com.aigestudio.wheelpicker.widgets.WheelMonthPicker;
 import com.aigestudio.wheelpicker.widgets.WheelYearPicker;
-import com.example.goodfood.database.UserEntity;
+import com.example.goodfood.services.GoNextButton;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -34,18 +32,15 @@ public class DateFragment extends Fragment
     private int currentMonth;
     private int currentDay;
 
-    public DateFragment()
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         Calendar calendar = Calendar.getInstance();
         currentYear = calendar.get(Calendar.YEAR);
         currentMonth = calendar.get(Calendar.MONTH) + 1;
         currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-    }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
         View dateView = inflater.inflate(R.layout.date_fragment, container, false);
 
         wheelDayPicker = dateView.findViewById(R.id.dayPicker);

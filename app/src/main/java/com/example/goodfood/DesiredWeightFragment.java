@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +20,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.goodfood.database.UserEntity;
+import com.example.goodfood.services.GoNextButton;
 
 public class DesiredWeightFragment extends Fragment
 {
@@ -129,46 +128,7 @@ public class DesiredWeightFragment extends Fragment
             }
         });
 
-        weightView.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                if (!(v instanceof EditText) && weightEditText.hasFocus())
-                {
-                    int value = 0;
-
-                    try
-                    {
-                        value = Integer.parseInt(weightEditText.getText().toString());
-                    } catch (NumberFormatException ignored)
-                    {
-                        value = 0;
-                    }
-
-                    if (value > getResources().getInteger(R.integer.max_weight))
-                    {
-                        weightEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_weight)));
-                    } else if (value < getResources().getInteger(R.integer.min_weight))
-                    {
-                        weightEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_weight)));
-                    }
-
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    View focucedView = getActivity().getCurrentFocus();
-                    if (focucedView == null)
-                    {
-                        focucedView = new View(getActivity());
-                    }
-                    imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
-                    weightEditText.clearFocus();
-                    v.performClick();
-                    return true;
-                }
-
-                return false;
-            }
-        });
+        weightView.setOnTouchListener(new OnWholeViewListener());
 
         ButtonWithCustomBackground nextBtn = weightView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
@@ -243,6 +203,47 @@ public class DesiredWeightFragment extends Fragment
             {
                 weightEditText.setText(String.valueOf(minWeight));
             }
+        }
+    }
+
+    private class OnWholeViewListener implements View.OnTouchListener
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent event)
+        {
+            if (!(v instanceof EditText) && weightEditText.hasFocus())
+            {
+                int value = 0;
+
+                try
+                {
+                    value = Integer.parseInt(weightEditText.getText().toString());
+                } catch (NumberFormatException ignored)
+                {
+                    value = 0;
+                }
+
+                if (value > getResources().getInteger(R.integer.max_weight))
+                {
+                    weightEditText.setText(String.valueOf(getResources().getInteger(R.integer.max_weight)));
+                } else if (value < getResources().getInteger(R.integer.min_weight))
+                {
+                    weightEditText.setText(String.valueOf(getResources().getInteger(R.integer.min_weight)));
+                }
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                View focucedView = getActivity().getCurrentFocus();
+                if (focucedView == null)
+                {
+                    focucedView = new View(getActivity());
+                }
+                imm.hideSoftInputFromWindow(focucedView.getWindowToken(), 0);
+                weightEditText.clearFocus();
+                v.performClick();
+                return true;
+            }
+
+            return false;
         }
     }
 }
