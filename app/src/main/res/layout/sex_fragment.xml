@@ -48,6 +48,7 @@
                 android:id="@+id/img_woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.3"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/ic_woman" />
 
@@ -55,6 +56,7 @@
                 android:id="@+id/textView_woman"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
+                android:alpha="0.3"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 style="@style/TextContent"
@@ -79,6 +81,7 @@
                 android:id="@+id/img_man"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.3"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/ic_man" />
 
@@ -87,6 +90,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.3"
                 android:layout_gravity="center_horizontal"
                 android:textSize="@dimen/def_text_sex"
                 style="@style/TextContent"

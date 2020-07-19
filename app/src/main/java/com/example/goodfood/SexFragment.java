@@ -22,7 +22,6 @@ public class SexFragment extends Fragment
     private boolean isWomanSelected = false;
     private boolean isManSelected = false;
 
-
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
@@ -33,21 +32,15 @@ public class SexFragment extends Fragment
         LinearLayout womanLinear = sexView.findViewById(R.id.woman);
         LinearLayout manLinear = sexView.findViewById(R.id.man);
 
-        final AppCompatImageView womanImage = sexView.findViewById(R.id.img_woman);
-        final AppCompatImageView manImage = sexView.findViewById(R.id.img_man);
-        final AppCompatTextView womanText = sexView.findViewById(R.id.textView_woman);
-        final AppCompatTextView manText = sexView.findViewById(R.id.textView_man);
-
-        womanImage.setAlpha(0.3f);
-        manImage.setAlpha(0.3f);
-        womanText.setAlpha(0.3f);
-        manText.setAlpha(0.3f);
+        AppCompatImageView womanImage = sexView.findViewById(R.id.img_woman);
+        AppCompatImageView manImage = sexView.findViewById(R.id.img_man);
+        AppCompatTextView womanText = sexView.findViewById(R.id.textView_woman);
+        AppCompatTextView manText = sexView.findViewById(R.id.textView_man);
 
         womanLinear.setOnClickListener(new WomanPressed(womanText, manText, womanImage, manImage));
-
         manLinear.setOnClickListener(new ManPressed(manText, womanText, manImage, womanImage));
 
-        final ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
+        ViewPager2 vp2 = getActivity().findViewById(R.id.viewPager);
 
         ButtonWithCustomBackground nextBtn = sexView.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new GoNextButton(vp2));
