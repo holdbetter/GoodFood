@@ -7,8 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "water")
-public
-class WaterEntity
+public class WaterEntity
 {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "water_id")
