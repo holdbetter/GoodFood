@@ -19,61 +19,51 @@ import com.example.goodfood.database.WaterEntity;
 import java.util.Calendar;
 import java.util.List;
 
-public class FoodRecycleAdapter extends RecyclerView.Adapter<FoodRecycleAdapter.FoodItemViewHolder>
-{
+public class FoodRecycleAdapter extends RecyclerView.Adapter<FoodRecycleAdapter.FoodItemViewHolder> {
     private List<FoodEntity> foodEntities;
 
 
-    public FoodRecycleAdapter(List<FoodEntity> foodEntities)
-    {
+    public FoodRecycleAdapter(List<FoodEntity> foodEntities) {
         this.foodEntities = foodEntities;
     }
 
     @NonNull
     @Override
-    public FoodItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
+    public FoodItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View foodItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_recycle_instance_constraint, parent, false);
         return new FoodItemViewHolder(foodItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodItemViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull FoodItemViewHolder holder, int position) {
         FoodEntity foodEntity = foodEntities.get(position);
 
-        if (holder.foodName.getText().length() < 1)
-        {
-            String foodName = foodEntity.name;
-            String foodKKal = String.valueOf(foodEntity.kkal);
-            String foodBel = String.valueOf(foodEntity.bel);
-            String foodZhir = String.valueOf(foodEntity.ugl);
-            String foodUgl = String.valueOf(foodEntity.ugl);
+        String foodName = foodEntity.name;
+        String foodKKal = String.valueOf(foodEntity.kkal);
+        String foodBel = String.valueOf(foodEntity.bel);
+        String foodZhir = String.valueOf(foodEntity.ugl);
+        String foodUgl = String.valueOf(foodEntity.ugl);
 
-            holder.foodName.setText(foodName);
-            holder.foodKKalCount.setText(foodKKal);
-            holder.foodBelCount.setText(foodBel);
-            holder.foodZhirCount.setText(foodZhir);
-            holder.foodUglCount.setText(foodUgl);
-        }
+        holder.foodName.setText(foodName);
+        holder.foodKKalCount.setText(foodKKal);
+        holder.foodBelCount.setText(foodBel);
+        holder.foodZhirCount.setText(foodZhir);
+        holder.foodUglCount.setText(foodUgl);
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return foodEntities.size();
     }
 
-    static class FoodItemViewHolder extends RecyclerView.ViewHolder
-    {
+    static class FoodItemViewHolder extends RecyclerView.ViewHolder {
         TextView foodName;
         TextView foodKKalCount;
         TextView foodBelCount;
         TextView foodZhirCount;
         TextView foodUglCount;
 
-        public FoodItemViewHolder(@NonNull View itemView)
-        {
+        public FoodItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             foodName = itemView.findViewById(R.id.nameFoodText);
@@ -83,13 +73,10 @@ public class FoodRecycleAdapter extends RecyclerView.Adapter<FoodRecycleAdapter.
             foodUglCount = itemView.findViewById(R.id.uglCountText);
 
             ButtonWithCustomBackground customBackground = itemView.findViewById(R.id.buttonGo);
-            customBackground.setOnTouchListener(new View.OnTouchListener()
-            {
+            customBackground.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event)
-                {
-                    switch (event.getAction())
-                    {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             v.setBackground(v.getResources().getDrawable(R.drawable.add_food_button_pressed));
                             return true;
