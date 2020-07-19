@@ -48,6 +48,7 @@ public class PollEndFragment extends Fragment
     private Handler handler;
     private ViewPager2 vp2;
     private UserEntity user;
+    private ButtonWithCustomBackground nextBtn;
 
     @Nullable
     @Override
@@ -58,7 +59,7 @@ public class PollEndFragment extends Fragment
         View pollEndFragment = inflater.inflate(R.layout.poll_end_fragment, container, false);
 
         vp2 = getActivity().findViewById(R.id.viewPager);
-        ButtonWithCustomBackground nextBtn = pollEndFragment.findViewById(R.id.buttonGo);
+        nextBtn = pollEndFragment.findViewById(R.id.buttonGo);
         nextBtn.setOnTouchListener(new RegisterButton(vp2));
 
         linears.clear();
@@ -164,6 +165,7 @@ public class PollEndFragment extends Fragment
         super.onPause();
 
         checkRestart();
+        nextBtn.setText("OK");
     }
 
     private void checkRestart()
@@ -260,12 +262,12 @@ public class PollEndFragment extends Fragment
     private void registerUser(final UserEntity user)
     {
         final MainActivity activity = (MainActivity) getActivity();
+        changeStatusBarColor(activity);
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-
                 user.IMT = user.weight / (Math.pow(user.height / 100.0, 2));
                 user.normWaterL = user.sex.equals("Мужской") ?
                         35 * user.weight : 31 * user.weight;
@@ -299,15 +301,6 @@ public class PollEndFragment extends Fragment
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.main, new MainPagerFragment()).commit();
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        changeStatusBarColor(activity);
-                    }
-                });
             }
         }).start();
     }
