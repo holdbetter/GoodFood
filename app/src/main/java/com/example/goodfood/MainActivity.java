@@ -66,27 +66,30 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        if (userIsSignedUp)
+        if (savedInstanceState == null)
         {
-            new Thread(new Runnable()
+            if (userIsSignedUp)
             {
-                @Override
-                public void run()
+                new Thread(new Runnable()
                 {
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-
-                    if (database.foodDao().getFoodInfoCount() < 1)
+                    @Override
+                    public void run()
                     {
-                        dataInitialize();
-                    }
+                        FragmentManager manager = getSupportFragmentManager();
+                        FragmentTransaction transaction = manager.beginTransaction();
 
-                    transaction.replace(R.id.main, new MainPagerFragment()).commit();
-                }
-            }).start();
-        } else
-        {
-            transaction.replace(R.id.main, new ViewPagerFragment()).commit();
+                        if (database.foodDao().getFoodInfoCount() < 1)
+                        {
+                            dataInitialize();
+                        }
+
+                        transaction.replace(R.id.main, new MainPagerFragment()).commit();
+                    }
+                }).start();
+            } else
+            {
+                transaction.replace(R.id.main, new ViewPagerFragment()).commit();
+            }
         }
     }
 
