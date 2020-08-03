@@ -52,14 +52,6 @@ public class AddFoodFragment extends Fragment
                 {
                     FoodRecycleAdapter foodAdapter = new FoodRecycleAdapter(foodList);
                     foodRecycler.setAdapter(foodAdapter);
-                    new Thread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-
-                        }
-                    }).start();
                     return;
                 }
 
