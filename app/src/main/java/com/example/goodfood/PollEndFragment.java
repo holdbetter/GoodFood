@@ -285,14 +285,14 @@ public class PollEndFragment extends Fragment
                 user.normFoodKkal = (int) (normFoodKkal * user.lifestyle);
                 user.yesterdayWeight = user.weight;
 
-                List<Long> result = activity.database.userDao().insert(user);
+                List<Long> result = activity.getDatabase().userDao().insert(user);
 
                 if (result.size() > 0)
                 {
                     activity.userIsSignedUp = true;
                 }
 
-                if (activity.database.foodDao().getFoodInfoCount() < 1)
+                if (activity.getDatabase().foodDao().getFoodInfoCount() < 1)
                 {
                     activity.dataInitialize();
                 }

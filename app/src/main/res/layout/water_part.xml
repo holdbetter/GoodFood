@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/waterCard"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    tools:layout_width="200dp"
+    tools:layout_height="200dp"
+    android:background="@drawable/water_card_selector"
+    android:paddingHorizontal="24dp"
+    android:paddingBottom="12dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/waterHeaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="Вода"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <FrameLayout
+        android:id="@+id/waterAddFrame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/waterHeaderText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/waterHeaderText"
+        app:layout_constraintWidth_percent="0.3">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="end|center_vertical"
+            app:srcCompat="@drawable/ic_plus"
+            app:tint="@color/main_home_image_color_selector" />
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/startMlProgressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@id/waterHeaderText"
+        app:layout_constraintTop_toBottomOf="@id/waterHeaderText"
+        tools:text="0 л" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/endMlProgressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="end"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waterHeaderText"
+        tools:text="1.5 л" />
+
+    <ProgressBar
+        android:id="@+id/mlProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:progressDrawable="@drawable/progress_bar_drawable"
+        app:layout_constraintLeft_toLeftOf="@id/startMlProgressText"
+        app:layout_constraintRight_toRightOf="@id/endMlProgressText"
+        app:layout_constraintTop_toBottomOf="@id/startMlProgressText"
+        tools:progress="80" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalMl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="end"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="0.8 л" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

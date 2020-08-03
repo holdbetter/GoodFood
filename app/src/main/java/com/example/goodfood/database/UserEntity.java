@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
@@ -41,6 +42,7 @@ public class UserEntity implements Parcelable
 
     }
 
+    @Ignore
     public UserEntity(long id, String name, String sex, long date, int height, double weight, double yesterdayWeight, double desiredWeight, double lifestyle, double IMT)
     {
         this.id = id;
@@ -55,6 +57,7 @@ public class UserEntity implements Parcelable
         this.IMT = IMT;
     }
 
+    @Ignore
     public UserEntity(String name, String sex, long date, int height, double weight, double yesterdayWeight, double desiredWeight, double lifestyle, double IMT)
     {
         this.name = name;

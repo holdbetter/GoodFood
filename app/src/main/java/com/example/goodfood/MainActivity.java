@@ -27,9 +27,10 @@ import java.util.concurrent.ThreadFactory;
 
 public class MainActivity extends FragmentActivity implements KeyEvent.Callback
 {
-    public GoodFoodDatabase database;
+    private GoodFoodDatabase database;
     public boolean userIsSignedUp = false;
     private static TimeZone phoneTimezone;
+    private UserEntity user;
 
     public static long getPhoneTimezoneOffset()
     {
@@ -45,7 +46,7 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
     protected void onCreate(Bundle savedInstanceState)
     {
         database = Room.databaseBuilder(getApplicationContext(), GoodFoodDatabase.class, "GoodFoodDb").allowMainThreadQueries().build();
-        UserEntity user = database.userDao().getUserInfo();
+        user = database.userDao().getUserInfo();
         userIsSignedUp = user != null;
 
         super.onCreate(savedInstanceState);
@@ -262,5 +263,20 @@ public class MainActivity extends FragmentActivity implements KeyEvent.Callback
             theme.applyStyle(R.style.RegistrationTheme, true);
         }
         return theme;
+    }
+
+    public GoodFoodDatabase getDatabase()
+    {
+        return database;
+    }
+
+    public UserEntity getUser()
+    {
+        return user;
+    }
+
+    public void setUser(UserEntity userInfo)
+    {
+        this.user = userInfo;
     }
 }
