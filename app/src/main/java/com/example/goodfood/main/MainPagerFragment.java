@@ -26,22 +26,10 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainPagerFragment extends Fragment
 {
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-//        // create ContextThemeWrapper from the original Activity Context with the custom theme
-//        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.MainTheme);
-//
-//        // clone the inflater using the ContextThemeWrapper
-//        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
-
         View mainContent = inflater.inflate(R.layout.main_content_fragment, container, false);
         MainFragmentTabAdapter mainFragmentTabAdapter = new MainFragmentTabAdapter(this);
         ViewPager2 vp2 = mainContent.findViewById(R.id.viewPager);
