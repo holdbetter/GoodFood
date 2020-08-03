@@ -261,13 +261,12 @@ public class PollEndFragment extends Fragment
 
     private void registerUser(final UserEntity user)
     {
-        final MainActivity activity = (MainActivity) getActivity();
-        changeStatusBarColor(activity);
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
+                MainActivity activity = (MainActivity) getActivity();
                 user.IMT = user.weight / (Math.pow(user.height / 100.0, 2));
                 user.normWaterL = user.sex.equals("Мужской") ?
                         35 * user.weight : 31 * user.weight;
@@ -303,21 +302,5 @@ public class PollEndFragment extends Fragment
                         .replace(R.id.main, new MainPagerFragment()).commit();
             }
         }).start();
-    }
-
-
-    private void changeStatusBarColor(Activity activity)
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
-            Window window = activity.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            }
-        }
     }
 }

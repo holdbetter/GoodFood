@@ -1,12 +1,16 @@
 package com.example.goodfood.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +26,12 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainPagerFragment extends Fragment
 {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -36,6 +46,7 @@ public class MainPagerFragment extends Fragment
         MainFragmentTabAdapter mainFragmentTabAdapter = new MainFragmentTabAdapter(this);
         ViewPager2 vp2 = mainContent.findViewById(R.id.viewPager);
         vp2.setAdapter(mainFragmentTabAdapter);
+        vp2.setOffscreenPageLimit(2);
         vp2.setCurrentItem(1);
 
         TabLayout tabLayout = mainContent.findViewById(R.id.tab_layout);
@@ -68,5 +79,27 @@ public class MainPagerFragment extends Fragment
         mediator.attach();
 
         return mainContent;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        changeStatusBarColor(getActivity());
+    }
+
+    private void changeStatusBarColor(Activity activity)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            Window window = activity.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+        }
     }
 }
